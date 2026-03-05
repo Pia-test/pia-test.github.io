@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kerakoski PURKKA - Tuotesivu</title>
-  <meta name="description" content="Kerakoski PURKKA. Tuotesivu, jossa esitellään mitä kaikkea tuotteesta voidaan kertoa GS1 2D -koodin kautta." />
+  <meta name="description" content="Kerakoski PURKKA - tuotesivu. Esimerkki siitä, miten tuotetietoja voidaan esittää selkeästi GS1 2D -koodin avulla." />
 
   <style>
     :root{
@@ -90,7 +90,7 @@
       display:block;
       font-size: 15px;
       letter-spacing: .2px;
-      white-space: nowrap; /* prevent odd line breaks */
+      white-space: nowrap;
     }
     .brand span{
       display:block;
@@ -318,15 +318,9 @@
       min-height: 112px;
       min-width: 0;
     }
-    @media (max-width: 1000px){
-      .card{ grid-column: span 4; }
-    }
-    @media (max-width: 700px){
-      .card{ grid-column: span 6; }
-    }
-    @media (max-width: 520px){
-      .card{ grid-column: span 12; }
-    }
+    @media (max-width: 1000px){ .card{ grid-column: span 4; } }
+    @media (max-width: 700px){ .card{ grid-column: span 6; } }
+    @media (max-width: 520px){ .card{ grid-column: span 12; } }
 
     .cardTop{
       display:flex; align-items:center; gap: 10px;
@@ -341,16 +335,8 @@
       font-size: 16px;
       flex: 0 0 auto;
     }
-    .card h3{
-      margin:0;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
+    .card h3{ margin:0; font-size: 15px; letter-spacing: -0.01em; }
+    .card p{ margin: 0; color: var(--muted); font-size: 13.5px; }
 
     /* Feature / scan box */
     .feature{
@@ -372,9 +358,7 @@
       gap: 14px;
       align-items:start;
     }
-    @media (max-width: 860px){
-      .featureInner{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 860px){ .featureInner{ grid-template-columns: 1fr; } }
     .feature h2{
       margin:0 0 8px;
       font-size: 22px;
@@ -423,9 +407,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    @media (max-width: 860px){
-      .twoCol{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 860px){ .twoCol{ grid-template-columns: 1fr; } }
 
     .panel{
       background: var(--surface);
@@ -453,7 +435,6 @@
     }
     .panel li{ margin: 6px 0; }
 
-    /* Nutrition table */
     table{
       width: 100%;
       border-collapse: collapse;
@@ -473,7 +454,6 @@
     td:first-child{ width: 58%; color: rgba(0,0,0,.72); }
     td:last-child{ text-align: right; color: rgba(0,0,0,.78); font-weight: 600; }
 
-    /* Footer */
     footer{
       margin-top: 54px;
       padding-top: 22px;
@@ -489,9 +469,9 @@
 <body>
   <div class="wrap">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Kerakoski etusivulle">
+      <a class="brand" href="/index.html" aria-label="Kerakoski etusivulle">
         <div class="logo" aria-hidden="true">
-          <img src="logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
+          <img src="/logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
         </div>
         <div class="brandText">
           <strong>Kerakoski</strong>
@@ -500,10 +480,10 @@
       </a>
 
       <nav class="nav" aria-label="Sivun navigaatio">
-        <a href="index.html">Etusivu</a>
-        <a class="active" href="purkka.html" aria-current="page">Tuote</a>
+        <a href="/index.html">Etusivu</a>
+        <a class="active" href="/purkka/" aria-current="page">Tuote</a>
         <a href="#skannaa">Skannaa</a>
-        <a href="#tiedot">Tuotetiedot</a>
+        <a href="#ainesosat">Ainesosat</a>
       </nav>
     </header>
 
@@ -514,14 +494,13 @@
           <div class="productInner">
             <div class="productMedia">
               <div class="mainImage">
-                <img src="purkka.png" alt="Kerakoski PURKKA" onerror="this.style.display='none'">
+                <img src="/purkka.png" alt="Kerakoski PURKKA" onerror="this.style.display='none'">
               </div>
 
-              <!-- Pikkukuvat ovat vapaaehtoisia: voit vaihtaa myöhemmin eri kuviin -->
               <div class="thumbs" aria-label="Tuotekuvat">
-                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 1" onerror="this.style.display='none'"></div>
-                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 2" onerror="this.style.display='none'"></div>
-                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 3" onerror="this.style.display='none'"></div>
+                <div class="thumb"><img src="/purkka.png" alt="Kerakoski PURKKA tuotekuva 1" onerror="this.style.display='none'"></div>
+                <div class="thumb"><img src="/purkka.png" alt="Kerakoski PURKKA tuotekuva 2" onerror="this.style.display='none'"></div>
+                <div class="thumb"><img src="/purkka.png" alt="Kerakoski PURKKA tuotekuva 3" onerror="this.style.display='none'"></div>
               </div>
             </div>
 
@@ -529,48 +508,51 @@
               <span class="kicker">Demotuote</span>
               <h1>Kerakoski PURKKA</h1>
               <p class="subtitle">
-                Raikas sokeriton spearmint-purukumi arkeen. Tuotesivulla voi kertoa selkeästi kaiken oleellisen,
-                ja tuoda mukaan myös ajantasaiset lisätiedot skannauksen kautta.
+                Raikas sokeriton spearmint-purukumi arkeen. Tuotesivulla voidaan esittää tuotetiedot selkeästi ja tuoda esiin myös erä- ja päiväystietoja.
               </p>
 
               <div class="tagRow" aria-label="Tuotteen ominaisuudet">
                 <span class="tag">Sokeriton</span>
                 <span class="tag">Spearmint</span>
                 <span class="tag">Ksylitoli</span>
-                <span class="tag">14 palaa</span>
+                <span class="tag">12 palaa</span>
+                <span class="tag">Gluteeniton</span>
+                <span class="tag">Laktoositon</span>
+                <span class="tag">Palmuöljytön</span>
+                <span class="tag">Vegaaninen</span>
               </div>
 
               <div class="actions">
                 <a class="btn primary" href="#skannaa">Skannaa ja katso lisätiedot</a>
-                <a class="btn" href="index.html">Takaisin etusivulle</a>
+                <a class="btn" href="/index.html">Takaisin etusivulle</a>
               </div>
 
               <div class="hint">
-                Vinkki: jos sama tuote näkyy eri kanavissa, tiedot kannattaa pitää yhdessä paikassa ja esittää käyttäjälle selkeänä näkymänä.
+                Messukäytössä jaettavana jakotavarana oleva tuote. Sivun tarkoitus on näyttää, miltä brändin oma tuotesivu voi näyttää GS1 2D -koodin yhteydessä.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- QUICK OVERVIEW CARDS -->
-      <section id="tiedot" aria-label="Tuotesivun sisällöt">
+      <!-- QUICK OVERVIEW -->
+      <section aria-label="Tuotesivun osiot">
         <div class="sectionHead">
           <div>
-            <h2>Mitä tuotesivulla voi olla</h2>
-            <p>Selkeä rakenne auttaa löytämään tiedot nopeasti, erityisesti mobiilissa.</p>
+            <h2>Tuotteen tiedot</h2>
+            <p>Yleisimmät kysymykset löytyvät nopeasti ja samasta paikasta myös mobiilissa.</p>
           </div>
         </div>
 
         <div class="grid">
           <div class="card hoverable">
             <div class="cardTop"><div class="icon">🧾</div><h3>Tuotekuvaus</h3></div>
-            <p>Ominaisuudet, käyttötarkoitus ja tärkeimmät tiedot helposti luettavana.</p>
+            <p>Ominaisuudet ja käyttötarkoitus tiiviisti ja selkeästi.</p>
           </div>
 
           <div class="card hoverable">
             <div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat ja allergeenit</h3></div>
-            <p>Yksi paikka ainesosille, huomioitaville asioille ja ravintoarvoille.</p>
+            <p>Ainesosaluettelo, huomioitavat asiat ja ravintoarvot samassa näkymässä.</p>
           </div>
 
           <div class="card hoverable">
@@ -580,7 +562,7 @@
 
           <div class="card hoverable">
             <div class="cardTop"><div class="icon">🦷</div><h3>Käyttövinkki</h3></div>
-            <p>Lyhyt ohje tai vinkki, joka auttaa käyttämään tuotetta arjessa.</p>
+            <p>Pureskele noin 10–20 minuuttia ruokailun jälkeen, jos se sopii sinulle.</p>
           </div>
         </div>
       </section>
@@ -592,8 +574,7 @@
             <div>
               <h2>Skannaa ja näe lisätiedot</h2>
               <p>
-                GS1 2D -koodi voi sisältää tuotetunnisteen lisäksi erä- ja päiväystietoja.
-                Näin tuotteen tieto voidaan esittää ajantasaisena ja käyttäjälle ymmärrettävänä.
+                GS1 2D -koodi voi sisältää tuotetunnisteen lisäksi erä- ja päiväystietoja. Näin tuotteen tieto voidaan esittää ajantasaisena ja käyttäjälle ymmärrettävänä.
               </p>
 
               <div class="steps" aria-label="Miten skannaus toimii">
@@ -612,25 +593,24 @@
               </div>
 
               <div class="note">
-                Huomio: tämä on demoympäristö ja sisällöt ovat kuvitteellisia, ellei erikseen toisin mainita.
+                Muut sivun sisällöt voivat olla demon laajennuksia tai esimerkkejä siitä, mitä brändi haluaa kertoa tuotteestaan.
               </div>
             </div>
 
             <div>
               <div class="panel hoverable">
-                <h3>Mitkä tiedot kiinnostavat eniten</h3>
+                <h3>Miksi tämä helpottaa arkea</h3>
                 <p>
-                  Usein kuluttaja etsii nopeasti vastauksia esimerkiksi ainesosiin, kierrätykseen, turvallisuuteen tai vastuullisuuteen liittyen.
-                  Siksi selkeä rakenne ja löydettävyys ovat tärkeimmät.
+                  Kun tieto löytyy yhdestä paikasta, sitä ei tarvitse etsiä useista lähteistä. Tämä parantaa kokemusta ja auttaa tekemään päätöksiä nopeasti.
                 </p>
               </div>
 
               <div style="height:12px"></div>
 
               <div class="panel hoverable">
-                <h3>Takaisinvedot ja erät</h3>
+                <h3>Erät ja päiväykset</h3>
                 <p>
-                  Erä- ja päiväystiedot mahdollistavat täsmäviestinnän. Jos jokin erä koskee vain osaa tuotteista, tieto voidaan kohdistaa oikein.
+                  Erä- ja päiväystiedot mahdollistavat täsmäviestinnän. Tarvittaessa tieto voidaan kohdistaa oikeaan erään.
                 </p>
               </div>
             </div>
@@ -639,11 +619,11 @@
       </section>
 
       <!-- INGREDIENTS + NUTRITION -->
-      <section aria-label="Ainesosat ja ravintoarvot">
+      <section id="ainesosat" aria-label="Ainesosat ja ravintoarvot">
         <div class="sectionHead">
           <div>
             <h2>Ainesosat ja ravintoarvot</h2>
-            <p>Tässä osiossa on pakkauksen mukaiset tiedot, esitettynä selkeässä muodossa.</p>
+            <p>Tiedot esitetään selkeänä kokonaisuutena. Tämä helpottaa erityisesti mobiilikäyttöä.</p>
           </div>
         </div>
 
@@ -681,12 +661,12 @@
         </div>
       </section>
 
-      <!-- PACKAGING + RECYCLING + MANUFACTURER -->
+      <!-- PACKAGING -->
       <section aria-label="Pakkaus ja kierrätys">
         <div class="sectionHead">
           <div>
             <h2>Pakkaus ja kierrätys</h2>
-            <p>Kun lajitteluohje on selkeä, oikea valinta on helppo tehdä.</p>
+            <p>Selkeä lajitteluohje auttaa tekemään oikean valinnan.</p>
           </div>
         </div>
 
@@ -698,27 +678,21 @@
               <li>Sisäpaperi: energiajäte</li>
               <li>Purukumi: sekajäte</li>
             </ul>
-            <p style="margin-top:10px;">
-              Lajitteluohjeet voidaan pitää ajan tasalla ja esittää käyttäjälle selkeänä ohjeena myös mobiilissa.
-            </p>
           </div>
 
           <div class="panel hoverable">
-            <h3>Pakkaaja ja alkuperä</h3>
+            <h3>Pakkaaja</h3>
             <p>
-              Pakkaaja: Rubiuss AB<br>
+              Rubiuss AB<br>
               Borggatan 6<br>
               S-44250 Ytterby<br>
-              www.borgstena.com
-            </p>
-            <p style="margin-top:10px;">
-              Tuotesivulla voidaan kertoa myös valmistajan ja pakkaajan tiedot sekä alkuperään liittyvät lisäselvitykset.
+              borgstena.com
             </p>
           </div>
         </div>
       </section>
 
-      <!-- BATCH / DATE / TRACEABILITY -->
+      <!-- BATCH / DATE -->
       <section aria-label="Erä- ja päiväystiedot">
         <div class="sectionHead">
           <div>
@@ -730,103 +704,24 @@
         <div class="grid">
           <div class="card hoverable" style="grid-column: span 4;">
             <div class="cardTop"><div class="icon">📦</div><h3>Eränumero</h3></div>
-            <p><strong>L240305</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
+            <p><strong>L240305</strong><br><small style="color:var(--muted);">Esimerkkiarvo</small></p>
           </div>
 
           <div class="card hoverable" style="grid-column: span 4;">
             <div class="cardTop"><div class="icon">📅</div><h3>Parasta ennen</h3></div>
-            <p><strong>10/2026</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
+            <p><strong>10/2026</strong><br><small style="color:var(--muted);">Esimerkkiarvo</small></p>
           </div>
 
           <div class="card hoverable" style="grid-column: span 4;">
             <div class="cardTop"><div class="icon">🔎</div><h3>Tuotetunniste</h3></div>
-            <p><strong>GTIN 0640000000000</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SUSTAINABILITY -->
-      <section aria-label="Vastuullisuus">
-        <div class="sectionHead">
-          <div>
-            <h2>Vastuullisuus</h2>
-            <p>Ytimekäs ja konkreettinen kuvaus auttaa ymmärtämään valintoja.</p>
-          </div>
-        </div>
-
-        <div class="twoCol">
-          <div class="panel hoverable">
-            <h3>Valinnat näkyviksi</h3>
-            <p>
-              Pakkaus on valittu kierrätettävyyttä ja selkeitä lajitteluohjeita ajatellen.
-              Tuotesivu tarjoaa paikan kertoa myös materiaalivalinnoista ja kehitystoimista avoimesti.
-            </p>
-          </div>
-
-          <div class="panel hoverable">
-            <h3>Luottamus syntyy selkeydestä</h3>
-            <p>
-              Kun tieto löytyy yhdestä paikasta, käyttäjän ei tarvitse etsiä useista lähteistä.
-              Tämä parantaa kokemusta ja auttaa tekemään päätöksiä arjessa.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CAMPAIGN -->
-      <section aria-label="Kampanja">
-        <div class="sectionHead">
-          <div>
-            <h2>Kampanja</h2>
-            <p>Kampanjasisältö voidaan lisätä tuotesivulle ilman että pakkausta tarvitsee muuttaa.</p>
-          </div>
-        </div>
-
-        <div class="feature hoverable">
-          <div class="featureInner">
-            <div>
-              <h2>Purkkapikahaaste</h2>
-              <p>
-                Vastaa yhteen kysymykseen ja osallistu arvontaan.
-                Tämä on esimerkki siitä, miten sisältöä voidaan vaihtaa ja päivittää nopeasti.
-              </p>
-              <div class="steps">
-                <div class="step">
-                  <strong>Kysymys</strong>
-                  <span>Mikä on tärkein syy valita sokeriton purukumi?</span>
-                </div>
-                <div class="step">
-                  <strong>Vastausvaihtoehdot</strong>
-                  <span>Raikkaus, hampaiden hyvinvointi, maku, muu</span>
-                </div>
-                <div class="step">
-                  <strong>Huomio</strong>
-                  <span>Tässä demossa toiminnallisuus voi olla pelkkä esimerkkielementti.</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="panel hoverable">
-                <h3>Miksi tämä on hyödyllistä</h3>
-                <ul>
-                  <li>Ajankohtaiset kampanjat ja sisällöt yhdessä paikassa</li>
-                  <li>Sama pakkaus, päivittyvä sisältö</li>
-                  <li>Mahdollisuus mitata kiinnostusta ja sitoutumista</li>
-                </ul>
-              </div>
-
-              <div style="height:12px"></div>
-
-              <a class="btn primary" href="#top">Takaisin ylös</a>
-            </div>
+            <p><strong>GTIN 0640000000000</strong><br><small style="color:var(--muted);">Esimerkkiarvo</small></p>
           </div>
         </div>
       </section>
 
       <footer>
         <div class="fineprint">
-          <strong>Huom.</strong> Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
+          <strong>Huom.</strong> Kerakoski.fi on GS1 Finlandin demoympäristö. Sivun tarkoitus on havainnollistaa GS1 2D -koodin mahdollisuuksia tavallisessa verkkoympäristössä.
         </div>
         <div>
           <span>GS1 Finland • Demo</span>
