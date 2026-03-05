@@ -814,6 +814,34 @@
   text-decoration: none;
   font-weight: 600;
   border: 1px solid rgba(255,255,255,0.3);
+  .hero {
+  background-image: url("hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  padding: 80px 60px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* tummentaa kuvaa jotta teksti näkyy */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.35) 40%,
+    rgba(0,0,0,0.0) 80%
+  );
+}
+
+.heroContent {
+  position: relative;
+  max-width: 520px;
+}
 }
   </style>
 </head>
