@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kerakoski PURKKA - Tuotesivu</title>
+  <meta name="description" content="Kerakoski PURKKA. Tuotesivu, jossa esitellään mitä kaikkea tuotteesta voidaan kertoa GS1 2D -koodin kautta." />
+
+  <style>
+    :root{
+      --bg: #fbfaf8;
+      --surface: rgba(255,255,255,.78);
+      --surface2: rgba(255,255,255,.88);
+      --ink: #161616;
+      --muted: #5b5b5b;
+      --line: rgba(0,0,0,.08);
+
+      --sage: #2f6f5e;
+      --clay: #c47d4a;
+      --lav: #7a74c7;
+      --rose: #d78aa4;
+
+      --radius-lg: 22px;
+      --radius-md: 16px;
+
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.05);
+
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 800px at 18% -10%, rgba(199,163,140,.18), transparent 60%),
+        radial-gradient(1000px 700px at 92% 8%, rgba(120,116,199,.14), transparent 55%),
+        radial-gradient(900px 650px at 55% 115%, rgba(47,111,94,.12), transparent 55%),
+        var(--bg);
+      line-height:1.5;
+    }
+
+    img, svg, video { max-width: 100%; height: auto; }
+    .wrap, .grid, .productInner, .featureInner { min-width: 0; }
+
+    h1,h2,h3,p,li,span,strong,em,small{
+      overflow-wrap: break-word;
+      word-break: normal;
+      hyphens: auto;
+    }
+
+    a{ color: inherit; }
+    .noUnderline{ text-decoration:none; }
+
+    .wrap{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 28px 20px 84px;
+    }
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 16px; padding: 10px 0 26px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      min-width: 0;
+      flex: 1 1 340px;
+    }
+    .logo{
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      box-shadow: var(--shadow-soft);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo img{ width:100%; height:100%; object-fit: cover; display:block; }
+    .brandText{ min-width: 0; }
+    .brand strong{
+      display:block;
+      font-size: 15px;
+      letter-spacing: .2px;
+      white-space: nowrap; /* prevent odd line breaks */
+    }
+    .brand span{
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top:2px;
+    }
+
+    .nav{
+      display:flex; gap: 14px; flex-wrap: wrap; justify-content:flex-end;
+      font-size: 14px;
+      min-width: 0;
+    }
+    .nav a{
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .nav a:hover{
+      background: rgba(0,0,0,.04);
+      color: var(--ink);
+    }
+    .nav a.active{
+      background: rgba(0,0,0,.06);
+      color: var(--ink);
+    }
+
+    @media (max-width: 720px){
+      .topbar{ flex-wrap: wrap; align-items:flex-start; }
+      .brand{ flex: 1 1 100%; }
+      .nav{ flex: 1 1 100%; justify-content:flex-start; gap: 10px; }
+    }
+
+    /* Sections */
+    section{ margin-top: 44px; }
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom: 14px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    .sectionHead p{
+      margin:0;
+      color: var(--muted);
+      max-width: 74ch;
+      font-size: 14.5px;
+    }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.62);
+      text-decoration:none;
+      color: rgba(0,0,0,.78);
+      box-shadow: var(--shadow-soft);
+      font-size: 14px;
+    }
+    .btn.primary{
+      background: rgba(0,0,0,.86);
+      color: rgba(255,255,255,.92);
+      border-color: rgba(0,0,0,.30);
+    }
+    .btn:hover{ filter: brightness(0.99); }
+
+    /* Hover (desktop only) */
+    .hoverable{
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      will-change: transform;
+    }
+    @media (hover:hover) and (pointer:fine){
+      .hoverable:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(0,0,0,.10);
+        border-color: rgba(0,0,0,.12);
+      }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hoverable{ transition: none; }
+    }
+
+    /* Product hero */
+    .productWrap{
+      background:
+        linear-gradient(135deg, rgba(215,138,164,.12), rgba(122,116,199,.10)),
+        radial-gradient(900px 650px at 15% 20%, rgba(196,125,74,.08), transparent 60%),
+        radial-gradient(900px 650px at 85% 90%, rgba(47,111,94,.08), transparent 60%),
+        rgba(255,255,255,.70);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .productInner{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 0;
+    }
+    @media (max-width: 920px){
+      .productInner{ grid-template-columns: 1fr; }
+    }
+
+    .productMedia{
+      padding: 18px;
+      border-right: 1px solid rgba(0,0,0,.06);
+      min-width: 0;
+    }
+    @media (max-width: 920px){
+      .productMedia{ border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
+    }
+
+    .mainImage{
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 14px 34px rgba(0,0,0,.10);
+      background: rgba(255,255,255,.85);
+      overflow:hidden;
+    }
+    .mainImage img{ display:block; width:100%; height:auto; }
+
+    .thumbs{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .thumb{
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+    }
+    .thumb img{ display:block; width:100%; height:100%; object-fit: cover; }
+
+    .productInfo{
+      padding: 22px;
+      min-width: 0;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: rgba(0,0,0,.72);
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.55);
+    }
+
+    .productInfo h1{
+      margin: 12px 0 8px;
+      font-size: clamp(28px, 3.4vw, 40px);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+    }
+
+    .subtitle{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 70ch;
+    }
+
+    .tagRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-size: 12.5px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.55);
+      color: rgba(0,0,0,.70);
+    }
+
+    .hint{
+      margin-top: 14px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(0,0,0,.06);
+      color: rgba(0,0,0,.76);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    /* Cards grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 3;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 13px;
+      box-shadow: var(--shadow-soft);
+      min-height: 112px;
+      min-width: 0;
+    }
+    @media (max-width: 1000px){
+      .card{ grid-column: span 4; }
+    }
+    @media (max-width: 700px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 520px){
+      .card{ grid-column: span 12; }
+    }
+
+    .cardTop{
+      display:flex; align-items:center; gap: 10px;
+      margin-bottom: 8px;
+      min-width: 0;
+    }
+    .icon{
+      width: 34px; height: 34px; border-radius: 12px;
+      background: rgba(0,0,0,.04);
+      border: 1px solid var(--line);
+      display:grid; place-items:center;
+      font-size: 16px;
+      flex: 0 0 auto;
+    }
+    .card h3{
+      margin:0;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    /* Feature / scan box */
+    .feature{
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      background:
+        linear-gradient(135deg, rgba(215,138,164,.14), rgba(122,116,199,.12)),
+        radial-gradient(900px 650px at 15% 20%, rgba(196,125,74,.08), transparent 60%),
+        radial-gradient(900px 650px at 85% 90%, rgba(47,111,94,.08), transparent 60%),
+        rgba(255,255,255,.75);
+      backdrop-filter: blur(6px);
+    }
+    .featureInner{
+      padding: 22px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 860px){
+      .featureInner{ grid-template-columns: 1fr; }
+    }
+    .feature h2{
+      margin:0 0 8px;
+      font-size: 22px;
+      letter-spacing: -.01em;
+    }
+    .feature p{
+      margin: 0;
+      color: rgba(0,0,0,.70);
+      max-width: 72ch;
+      font-size: 14.5px;
+    }
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step{
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .step strong{
+      display:block;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+      color: rgba(0,0,0,.80);
+    }
+    .step span{
+      display:block;
+      color: rgba(0,0,0,.66);
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    .note{
+      margin-top: 12px;
+      font-size: 12.8px;
+      color: rgba(0,0,0,.60);
+    }
+
+    /* Two-column content blocks */
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 860px){
+      .twoCol{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      min-width: 0;
+    }
+    .panel h3{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .panel p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.8px;
+    }
+    .panel ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13.8px;
+    }
+    .panel li{ margin: 6px 0; }
+
+    /* Nutrition table */
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      color: rgba(0,0,0,.75);
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.60);
+    }
+    td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      vertical-align: top;
+    }
+    tr:last-child td{ border-bottom:none; }
+    td:first-child{ width: 58%; color: rgba(0,0,0,.72); }
+    td:last-child{ text-align: right; color: rgba(0,0,0,.78); font-weight: 600; }
+
+    /* Footer */
+    footer{
+      margin-top: 54px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex; justify-content:space-between; gap: 14px; flex-wrap: wrap;
+    }
+    .fineprint{ max-width: 95ch; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Kerakoski etusivulle">
+        <div class="logo" aria-hidden="true">
+          <img src="logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
+        </div>
+        <div class="brandText">
+          <strong>Kerakoski</strong>
+          <span>GS1 2D-koodin demoympäristö</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Sivun navigaatio">
+        <a href="index.html">Etusivu</a>
+        <a class="active" href="purkka.html" aria-current="page">Tuote</a>
+        <a href="#skannaa">Skannaa</a>
+        <a href="#tiedot">Tuotetiedot</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- PRODUCT HERO -->
+      <section aria-label="Tuotteen esittely">
+        <div class="productWrap hoverable">
+          <div class="productInner">
+            <div class="productMedia">
+              <div class="mainImage">
+                <img src="purkka.png" alt="Kerakoski PURKKA" onerror="this.style.display='none'">
+              </div>
+
+              <!-- Pikkukuvat ovat vapaaehtoisia: voit vaihtaa myöhemmin eri kuviin -->
+              <div class="thumbs" aria-label="Tuotekuvat">
+                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 1" onerror="this.style.display='none'"></div>
+                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 2" onerror="this.style.display='none'"></div>
+                <div class="thumb"><img src="purkka.png" alt="Kerakoski PURKKA tuotekuva 3" onerror="this.style.display='none'"></div>
+              </div>
+            </div>
+
+            <div class="productInfo">
+              <span class="kicker">Demotuote</span>
+              <h1>Kerakoski PURKKA</h1>
+              <p class="subtitle">
+                Raikas sokeriton spearmint-purukumi arkeen. Tuotesivulla voi kertoa selkeästi kaiken oleellisen,
+                ja tuoda mukaan myös ajantasaiset lisätiedot skannauksen kautta.
+              </p>
+
+              <div class="tagRow" aria-label="Tuotteen ominaisuudet">
+                <span class="tag">Sokeriton</span>
+                <span class="tag">Spearmint</span>
+                <span class="tag">Ksylitoli</span>
+                <span class="tag">14 palaa</span>
+              </div>
+
+              <div class="actions">
+                <a class="btn primary" href="#skannaa">Skannaa ja katso lisätiedot</a>
+                <a class="btn" href="index.html">Takaisin etusivulle</a>
+              </div>
+
+              <div class="hint">
+                Vinkki: jos sama tuote näkyy eri kanavissa, tiedot kannattaa pitää yhdessä paikassa ja esittää käyttäjälle selkeänä näkymänä.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUICK OVERVIEW CARDS -->
+      <section id="tiedot" aria-label="Tuotesivun sisällöt">
+        <div class="sectionHead">
+          <div>
+            <h2>Mitä tuotesivulla voi olla</h2>
+            <p>Selkeä rakenne auttaa löytämään tiedot nopeasti, erityisesti mobiilissa.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🧾</div><h3>Tuotekuvaus</h3></div>
+            <p>Ominaisuudet, käyttötarkoitus ja tärkeimmät tiedot helposti luettavana.</p>
+          </div>
+
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat ja allergeenit</h3></div>
+            <p>Yksi paikka ainesosille, huomioitaville asioille ja ravintoarvoille.</p>
+          </div>
+
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">♻️</div><h3>Kierrätys</h3></div>
+            <p>Selkeät lajitteluohjeet, jotta pakkaus päätyy oikeaan paikkaan.</p>
+          </div>
+
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🦷</div><h3>Käyttövinkki</h3></div>
+            <p>Lyhyt ohje tai vinkki, joka auttaa käyttämään tuotetta arjessa.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCAN FEATURE -->
+      <section id="skannaa" aria-label="Skannaa ja näe lisätiedot">
+        <div class="feature hoverable">
+          <div class="featureInner">
+            <div>
+              <h2>Skannaa ja näe lisätiedot</h2>
+              <p>
+                GS1 2D -koodi voi sisältää tuotetunnisteen lisäksi erä- ja päiväystietoja.
+                Näin tuotteen tieto voidaan esittää ajantasaisena ja käyttäjälle ymmärrettävänä.
+              </p>
+
+              <div class="steps" aria-label="Miten skannaus toimii">
+                <div class="step">
+                  <strong>1) Skannaa pakkauksen koodi</strong>
+                  <span>Käytä puhelimen kameraa tai QR-lukijaa.</span>
+                </div>
+                <div class="step">
+                  <strong>2) Avaa tuotesivu</strong>
+                  <span>Tuotteen tiedot avautuvat siistinä ja helposti luettavana.</span>
+                </div>
+                <div class="step">
+                  <strong>3) Näe ajantasaiset tiedot</strong>
+                  <span>Esimerkiksi erä, päiväys, ohjeet, kierrätys ja muut lisätiedot.</span>
+                </div>
+              </div>
+
+              <div class="note">
+                Huomio: tämä on demoympäristö ja sisällöt ovat kuvitteellisia, ellei erikseen toisin mainita.
+              </div>
+            </div>
+
+            <div>
+              <div class="panel hoverable">
+                <h3>Mitkä tiedot kiinnostavat eniten</h3>
+                <p>
+                  Usein kuluttaja etsii nopeasti vastauksia esimerkiksi ainesosiin, kierrätykseen, turvallisuuteen tai vastuullisuuteen liittyen.
+                  Siksi selkeä rakenne ja löydettävyys ovat tärkeimmät.
+                </p>
+              </div>
+
+              <div style="height:12px"></div>
+
+              <div class="panel hoverable">
+                <h3>Takaisinvedot ja erät</h3>
+                <p>
+                  Erä- ja päiväystiedot mahdollistavat täsmäviestinnän. Jos jokin erä koskee vain osaa tuotteista, tieto voidaan kohdistaa oikein.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INGREDIENTS + NUTRITION -->
+      <section aria-label="Ainesosat ja ravintoarvot">
+        <div class="sectionHead">
+          <div>
+            <h2>Ainesosat ja ravintoarvot</h2>
+            <p>Tässä osiossa on pakkauksen mukaiset tiedot, esitettynä selkeässä muodossa.</p>
+          </div>
+        </div>
+
+        <div class="twoCol">
+          <div class="panel hoverable">
+            <h3>Ainesosat</h3>
+            <p><strong>FI Sokeriton Spearmint</strong></p>
+            <p>
+              makeutusaineet (sorbitoli, isomalttioli, maltitolisiirappi, ksylitoli, asesulfaami K, aspartaami),
+              purukumin perusmassa, säilöntäaineet (arabikumi), aromit, happamuudensäätöaine (sitruunahappo),
+              väri (E171), kosteudensäilyttäjä (glyseroli), pintakäsittelyaineet (karnaubavaha),
+              emulgointiaine (lesitiini E322).
+            </p>
+            <ul>
+              <li>Sisältää fenyylialaniinin lähteen.</li>
+              <li>Liiallisella käytöllä voi olla laksatiivisia vaikutuksia.</li>
+            </ul>
+          </div>
+
+          <div class="panel hoverable">
+            <h3>Ravintosisältö / 100 g</h3>
+            <table aria-label="Ravintosisältö per 100 grammaa">
+              <tbody>
+                <tr><td>Energia</td><td>640 kJ / 160 kcal</td></tr>
+                <tr><td>Rasva</td><td>0,8 g</td></tr>
+                <tr><td>josta tyydyttynyttä</td><td>0,4 g</td></tr>
+                <tr><td>Hiilihydraatit</td><td>70,3 g</td></tr>
+                <tr><td>josta sokereita</td><td>0 g</td></tr>
+                <tr><td>josta polyoleja</td><td>66,9 g</td></tr>
+                <tr><td>Proteiini</td><td>0 g</td></tr>
+                <tr><td>Suola</td><td>0 g</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PACKAGING + RECYCLING + MANUFACTURER -->
+      <section aria-label="Pakkaus ja kierrätys">
+        <div class="sectionHead">
+          <div>
+            <h2>Pakkaus ja kierrätys</h2>
+            <p>Kun lajitteluohje on selkeä, oikea valinta on helppo tehdä.</p>
+          </div>
+        </div>
+
+        <div class="twoCol">
+          <div class="panel hoverable">
+            <h3>Kierrätysohjeet</h3>
+            <ul>
+              <li>Kartonkipakkaus: kartonkikeräys</li>
+              <li>Sisäpaperi: energiajäte</li>
+              <li>Purukumi: sekajäte</li>
+            </ul>
+            <p style="margin-top:10px;">
+              Lajitteluohjeet voidaan pitää ajan tasalla ja esittää käyttäjälle selkeänä ohjeena myös mobiilissa.
+            </p>
+          </div>
+
+          <div class="panel hoverable">
+            <h3>Pakkaaja ja alkuperä</h3>
+            <p>
+              Pakkaaja: Rubiuss AB<br>
+              Borggatan 6<br>
+              S-44250 Ytterby<br>
+              www.borgstena.com
+            </p>
+            <p style="margin-top:10px;">
+              Tuotesivulla voidaan kertoa myös valmistajan ja pakkaajan tiedot sekä alkuperään liittyvät lisäselvitykset.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BATCH / DATE / TRACEABILITY -->
+      <section aria-label="Erä- ja päiväystiedot">
+        <div class="sectionHead">
+          <div>
+            <h2>Erä- ja päiväystiedot</h2>
+            <p>Erä- ja päiväystiedot tukevat jäljitettävyyttä ja voivat auttaa hävikin vähentämisessä.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card hoverable" style="grid-column: span 4;">
+            <div class="cardTop"><div class="icon">📦</div><h3>Eränumero</h3></div>
+            <p><strong>L240305</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
+          </div>
+
+          <div class="card hoverable" style="grid-column: span 4;">
+            <div class="cardTop"><div class="icon">📅</div><h3>Parasta ennen</h3></div>
+            <p><strong>10/2026</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
+          </div>
+
+          <div class="card hoverable" style="grid-column: span 4;">
+            <div class="cardTop"><div class="icon">🔎</div><h3>Tuotetunniste</h3></div>
+            <p><strong>GTIN 0640000000000</strong><br><small style="color:var(--muted);">Esimerkkiarvo tuotesivulle</small></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUSTAINABILITY -->
+      <section aria-label="Vastuullisuus">
+        <div class="sectionHead">
+          <div>
+            <h2>Vastuullisuus</h2>
+            <p>Ytimekäs ja konkreettinen kuvaus auttaa ymmärtämään valintoja.</p>
+          </div>
+        </div>
+
+        <div class="twoCol">
+          <div class="panel hoverable">
+            <h3>Valinnat näkyviksi</h3>
+            <p>
+              Pakkaus on valittu kierrätettävyyttä ja selkeitä lajitteluohjeita ajatellen.
+              Tuotesivu tarjoaa paikan kertoa myös materiaalivalinnoista ja kehitystoimista avoimesti.
+            </p>
+          </div>
+
+          <div class="panel hoverable">
+            <h3>Luottamus syntyy selkeydestä</h3>
+            <p>
+              Kun tieto löytyy yhdestä paikasta, käyttäjän ei tarvitse etsiä useista lähteistä.
+              Tämä parantaa kokemusta ja auttaa tekemään päätöksiä arjessa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAMPAIGN -->
+      <section aria-label="Kampanja">
+        <div class="sectionHead">
+          <div>
+            <h2>Kampanja</h2>
+            <p>Kampanjasisältö voidaan lisätä tuotesivulle ilman että pakkausta tarvitsee muuttaa.</p>
+          </div>
+        </div>
+
+        <div class="feature hoverable">
+          <div class="featureInner">
+            <div>
+              <h2>Purkkapikahaaste</h2>
+              <p>
+                Vastaa yhteen kysymykseen ja osallistu arvontaan.
+                Tämä on esimerkki siitä, miten sisältöä voidaan vaihtaa ja päivittää nopeasti.
+              </p>
+              <div class="steps">
+                <div class="step">
+                  <strong>Kysymys</strong>
+                  <span>Mikä on tärkein syy valita sokeriton purukumi?</span>
+                </div>
+                <div class="step">
+                  <strong>Vastausvaihtoehdot</strong>
+                  <span>Raikkaus, hampaiden hyvinvointi, maku, muu</span>
+                </div>
+                <div class="step">
+                  <strong>Huomio</strong>
+                  <span>Tässä demossa toiminnallisuus voi olla pelkkä esimerkkielementti.</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="panel hoverable">
+                <h3>Miksi tämä on hyödyllistä</h3>
+                <ul>
+                  <li>Ajankohtaiset kampanjat ja sisällöt yhdessä paikassa</li>
+                  <li>Sama pakkaus, päivittyvä sisältö</li>
+                  <li>Mahdollisuus mitata kiinnostusta ja sitoutumista</li>
+                </ul>
+              </div>
+
+              <div style="height:12px"></div>
+
+              <a class="btn primary" href="#top">Takaisin ylös</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="fineprint">
+          <strong>Huom.</strong> Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
+        </div>
+        <div>
+          <span>GS1 Finland • Demo</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
