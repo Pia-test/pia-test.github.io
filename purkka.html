@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kerakoski PURKKA – tuotesivu (demo)</title>
+  <meta name="description" content="Kerakoski PURKKA on kuvitteellinen demotuote. Tämä tuotesivu näyttää, miten GS1 2D-koodi voi tuoda tuotetiedot esiin selkeästi." />
+
+  <style>
+    :root{
+      --bg: #fbfaf8;
+      --surface: rgba(255,255,255,.78);
+      --surface2: rgba(255,255,255,.88);
+      --ink: #161616;
+      --muted: #5b5b5b;
+      --line: rgba(0,0,0,.08);
+
+      --sage: #2f6f5e;
+      --clay: #c47d4a;
+      --lav: #7a74c7;
+      --rose: #d78aa4;
+
+      --radius-lg: 22px;
+      --radius-md: 16px;
+
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.05);
+
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 800px at 18% -10%, rgba(199,163,140,.18), transparent 60%),
+        radial-gradient(1000px 700px at 92% 8%, rgba(120,116,199,.14), transparent 55%),
+        radial-gradient(900px 650px at 55% 115%, rgba(47,111,94,.12), transparent 55%),
+        var(--bg);
+      line-height:1.5;
+    }
+
+    img, svg, video { max-width: 100%; height: auto; }
+    h1,h2,h3,p,li,a,span,strong,em { overflow-wrap:anywhere; word-break: break-word; }
+    a{ color: inherit; }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 28px 20px 84px; }
+
+    /* Topbar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 16px; padding: 10px 0 26px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      min-width: 0;
+    }
+    .logo{
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      box-shadow: var(--shadow-soft);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .logo img{ width:100%; height:100%; object-fit: cover; display:block; }
+    .brand strong{ font-size: 15px; letter-spacing: .2px; }
+    .brand span{ display:block; font-size: 12px; color: var(--muted); margin-top:2px; }
+
+    .nav{ display:flex; gap: 14px; flex-wrap: wrap; justify-content:flex-end; font-size: 14px; }
+    .nav a{ text-decoration:none; padding: 8px 10px; border-radius: 999px; color: var(--muted); }
+    .nav a:hover{ background: rgba(0,0,0,.04); color: var(--ink); }
+
+    /* Cards / sections */
+    section{ margin-top: 36px; }
+    .sectionHead{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom: 14px; }
+    .sectionHead h2{ margin:0; font-size: 22px; letter-spacing: -0.01em; }
+    .sectionHead p{ margin:0; color: var(--muted); max-width: 78ch; font-size: 14.5px; }
+
+    .hero{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .heroInner{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 0;
+    }
+    @media (max-width: 920px){ .heroInner{ grid-template-columns: 1fr; } }
+
+    .heroMedia{
+      padding: 18px;
+      border-right: 1px solid rgba(0,0,0,.06);
+      display:flex; align-items:center; justify-content:center;
+      min-width: 0;
+    }
+    @media (max-width: 920px){ .heroMedia{ border-right:none; border-bottom: 1px solid rgba(0,0,0,.06); } }
+
+    .heroMedia img{
+      width: 100%;
+      max-width: 720px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 14px 34px rgba(0,0,0,.10);
+      background: rgba(255,255,255,.85);
+      display:block;
+    }
+
+    .heroInfo{ padding: 22px; min-width: 0; }
+    .kicker{
+      display:inline-flex; align-items:center; gap: 8px;
+      font-size: 12.5px; color: rgba(0,0,0,.72);
+      padding: 7px 10px; border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.55);
+    }
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(26px, 3.2vw, 40px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .lead{ margin: 0 0 14px; color: var(--muted); font-size: 15.5px; max-width: 72ch; }
+
+    .facts{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .fact{
+      grid-column: span 6;
+      border-radius: 16px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(0,0,0,.06);
+      padding: 12px;
+      min-width: 0;
+    }
+    @media (max-width: 700px){ .fact{ grid-column: span 12; } }
+    .fact strong{ display:block; font-size: 13px; letter-spacing: -.01em; }
+    .fact span{ display:block; margin-top: 4px; color: var(--muted); font-size: 13.5px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 4;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+      min-height: 132px;
+      min-width: 0;
+    }
+    @media (max-width: 980px){ .card{ grid-column: span 6; } }
+    @media (max-width: 520px){ .card{ grid-column: span 12; } }
+
+    .cardTop{ display:flex; align-items:center; gap: 10px; margin-bottom: 8px; min-width:0; }
+    .icon{
+      width: 34px; height: 34px; border-radius: 12px;
+      background: rgba(0,0,0,.04);
+      border: 1px solid var(--line);
+      display:grid; place-items:center;
+      font-size: 16px;
+      flex: 0 0 auto;
+    }
+    .card h3{ margin:0; font-size: 15px; letter-spacing: -0.01em; }
+    .card p{ margin: 0; color: var(--muted); font-size: 13.5px; }
+
+    .sub{
+      margin-top: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(0,0,0,.06);
+      color: rgba(0,0,0,.76);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .badge{
+      display:inline-flex; align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.04);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* Hover (desktop only) */
+    .hoverable{
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      will-change: transform;
+    }
+    @media (hover:hover) and (pointer:fine){
+      .hoverable:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(0,0,0,.10);
+        border-color: rgba(0,0,0,.12);
+      }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hoverable{ transition: none; }
+    }
+
+    footer{
+      margin-top: 54px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex; justify-content:space-between; gap: 14px; flex-wrap: wrap;
+    }
+    .fineprint{ max-width: 95ch; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Kerakoski etusivulle">
+        <div class="logo" aria-hidden="true">
+          <img src="logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <strong>Kerakoski</strong>
+          <span>GS1 2D-koodin demoympäristö</span>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Sivun navigaatio">
+        <a href="index.html#top">Etusivu</a>
+        <a href="#tiedot">Tuotetiedot</a>
+        <a href="#sisalto">Sisällöt</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <div class="hero hoverable" id="top">
+        <div class="heroInner">
+          <div class="heroMedia">
+            <img src="purkka.png" alt="Kerakoski PURKKA -demotuote" onerror="this.style.display='none'">
+          </div>
+
+          <div class="heroInfo">
+            <span class="kicker">Demotuote</span>
+            <h1>Kerakoski PURKKA</h1>
+            <p class="lead">
+              Kuvitteellinen sokeriton mintunmakuinen purukumi. Tämä sivu näyttää esimerkinomaisesti,
+              mitä kaikkea tuotteesta voidaan kertoa GS1 2D-koodin kautta — selkeästi, mobiilissa ja brändin hallinnoimana.
+            </p>
+
+            <div class="facts" id="tiedot">
+              <div class="fact">
+                <strong>Perustiedot</strong>
+                <span>Purukumi • sokeriton • minttu • 14 g (10 pastillia)</span>
+              </div>
+              <div class="fact">
+                <strong>Säilytys</strong>
+                <span>Huoneenlämmössä, suojassa kosteudelta ja auringolta</span>
+              </div>
+              <div class="fact">
+                <strong>Kenelle</strong>
+                <span>Aikuisille ja yli 6-vuotiaille. Suositus: kohtuudella.</span>
+              </div>
+              <div class="fact">
+                <strong>Valmistaja (demo)</strong>
+                <span>Kerakoski Oy, Suomi • Asiakaspalvelu: demo@kerakoski.fi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT CARDS -->
+      <section id="sisalto">
+        <div class="sectionHead">
+          <div>
+            <h2>Mitä kaikkea tuotesivulla voi olla</h2>
+            <p>
+              Alla on esimerkkisisältöjä samoilla “laatikoilla” kuin etusivulla. Tiedot ovat kuvitteellisia ja vain demon tarkoituksiin.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- 🧾 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🧾</div><h3>Laajemmat tuotetiedot</h3></div>
+            <p>Kuvaus, ominaisuudet, kuvat ja linkit — yhdessä paikassa.</p>
+            <div class="sub">
+              <strong>Kuvaus:</strong> raikas, sokeriton minttupurkka arjen hetkiin.<br>
+              <strong>Ominaisuudet:</strong> ksylitoli • vegaaninen • gluteeniton (demo).
+            </div>
+          </div>
+
+          <!-- 🥜 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat & allergeenit</h3></div>
+            <p>Helpommin löydettävät tiedot myös mobiilissa.</p>
+            <div class="sub">
+              <strong>Ainesosat (demo):</strong> makeutusaineet (ksylitoli, sorbitoli), purukumipohja, aromit (minttu),
+              happamuudensäätöaine (omenahappo), pintakäsittelyaine (karnaubavaha).<br>
+              <strong>Allergeenit:</strong> ei sisällä yleisimpiä allergeeneja (demo).
+            </div>
+          </div>
+
+          <!-- 🍲 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🍲</div><h3>Ohjeet & reseptit</h3></div>
+            <p>Käyttöohjeet, vinkit ja reseptit pakkauksesta verkkoon.</p>
+            <div class="sub">
+              <strong>Käyttö:</strong> pureskele 1–2 pastillia tarvittaessa.<br>
+              <strong>Vinkki:</strong> ksylitolia sisältävä purkka aterian jälkeen voi tukea suun hyvinvointia (yleinen esimerkkiväite, demo).
+            </div>
+          </div>
+
+          <!-- ♻️ -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">♻️</div><h3>Kierrätys ja lajittelu</h3></div>
+            <p>Selkeät lajitteluohjeet — oikeaan paikkaan, oikeaan aikaan.</p>
+            <div class="sub">
+              <strong>Pakkaus (demo):</strong> kartonki + muovinen sisäpussi.<br>
+              <strong>Lajittelu:</strong> kartonki → kartonki, sisäpussi → muovipakkaus.
+            </div>
+          </div>
+
+          <!-- 🌿 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🌿</div><h3>Vastuullisuus</h3></div>
+            <p>Alkuperä, sertifikaatit ja valinnat avoimesti esiin.</p>
+            <div class="sub">
+              <strong>Valmistus (demo):</strong> valmistettu EU:ssa.<br>
+              <strong>Pakkaus:</strong> tavoitteena vähentää muovia 20 % (demo).
+            </div>
+          </div>
+
+          <!-- 📦 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">📦</div><h3>Erä- ja päiväystiedot</h3></div>
+            <p>Tuki toimitusketjulle ja hävikin vähentämiselle.</p>
+            <div class="sub">
+              <strong>Erä (demo):</strong> L2403-KRK<br>
+              <strong>Parasta ennen (demo):</strong> 2027-06-30
+            </div>
+          </div>
+
+          <!-- 🔐 -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🔐</div><h3>Yksilöinti</h3></div>
+            <p>Sarjanumerot ja yksilölliset tunnisteet tarvittaessa.</p>
+            <div class="sub">
+              <strong>Serial (demo):</strong> 9A7F-3K2M-18QX<br>
+              <span style="color: var(--muted);">Hyödyllinen esim. aitouden varmistukseen ja palautuksiin.</span>
+            </div>
+          </div>
+
+          <!-- 🛡️ -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🛡️</div><h3>Turvallisuus ja takaisinvedot</h3></div>
+            <p>Nopeampi viestintä ja täsmätieto oikealle erälle.</p>
+            <div class="sub">
+              <strong>Tiedote (demo):</strong> Ei aktiivisia turvallisuushavaintoja.<br>
+              <span style="color: var(--muted);">Tähän voisi ilmestyä eräkohtainen takaisinvetotieto.</span>
+            </div>
+          </div>
+
+          <!-- ✨ -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">✨</div><h3>Kampanjat & kilpailu</h3></div>
+            <p>Tarjoukset ja sisällöt — ilman että pakkausta tarvitsee uudistaa.</p>
+            <div class="sub">
+              <strong>Kilpailu (demo):</strong> Skannaa ja osallistu – voit voittaa “Kerakoski-hetkipaketin”.<br>
+              <span style="color: var(--muted);">Voimassa 1.–31.5. (demo).</span>
+            </div>
+          </div>
+
+          <!-- 🗺️ (later) -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🗺️</div><h3>Kontekstin mukaan</h3></div>
+            <p>Myymälä, koti tai toinen maa — sisältö voidaan räätälöidä.</p>
+            <span class="badge">Tehdään myöhemmin: eri sisältöversiot</span>
+          </div>
+
+          <!-- 🌍 (later) -->
+          <div class="card hoverable">
+            <div class="cardTop"><div class="icon">🌍</div><h3>Monikielisyys</h3></div>
+            <p>Sama pakkaus, eri kieli — selkeä kokemus käyttäjälle.</p>
+            <span class="badge">Tehdään myöhemmin: kieliversiot</span>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="fineprint">
+          <strong>Huom.</strong> Tämä tuotesivu on demokäyttöön. Tuote ja sisällöt ovat kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
+        </div>
+        <div>
+          <span><a href="index.html" style="text-decoration:none;">← Takaisin etusivulle</a></span>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
