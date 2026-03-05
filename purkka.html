@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="fi">
+
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kerakoski PURKKA - tuotesivu</title>
 
-<meta name="description" content="Kerakoski PURKKA.">
+<title>Kerakoski PURKKA</title>
+
+<meta name="description" content="Kerakoski PURKKA tuotesivu">
 
 <style>
 
@@ -27,16 +30,18 @@
 
 *{box-sizing:border-box}
 
-html,body{
-height:100%;
+body{
 margin:0;
 font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+background:var(--bg);
 color:var(--ink);
-background:
-radial-gradient(1200px 800px at 18% -10%,rgba(199,163,140,.18),transparent 60%),
-radial-gradient(900px 650px at 55% 115%,rgba(47,111,94,.12),transparent 55%),
-var(--bg);
 line-height:1.5;
+}
+
+.wrap{
+max-width:var(--max);
+margin:auto;
+padding:28px 20px 80px;
 }
 
 img{max-width:100%;height:auto}
@@ -47,18 +52,15 @@ word-break:normal;
 hyphens:auto;
 }
 
-.wrap{
-max-width:var(--max);
-margin:0 auto;
-padding:28px 20px 80px;
-}
+a{color:inherit}
 
 .topbar{
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
 padding-bottom:24px;
 gap:16px;
+flex-wrap:wrap;
 }
 
 .brand{
@@ -73,22 +75,23 @@ color:inherit;
 width:56px;
 height:56px;
 border-radius:16px;
-border:1px solid var(--line);
 background:#fff;
+border:1px solid var(--line);
 display:grid;
 place-items:center;
-box-shadow:var(--shadow-soft);
+overflow:hidden;
 }
 
 .brand strong{
-display:block;
 white-space:nowrap;
 font-size:15px;
+display:block;
 }
 
 .brand span{
 font-size:12px;
 color:var(--muted);
+display:block;
 }
 
 .nav{
@@ -128,7 +131,6 @@ grid-template-columns:1fr 1fr;
 
 .heroMedia{
 padding:20px;
-border-right:1px solid rgba(0,0,0,.06);
 }
 
 .heroInfo{
@@ -137,20 +139,21 @@ padding:22px;
 
 .kicker{
 font-size:12px;
-border:1px solid rgba(0,0,0,.1);
-border-radius:999px;
 padding:6px 10px;
+border:1px solid var(--line);
+border-radius:999px;
 display:inline-block;
+background:rgba(255,255,255,.6);
 }
 
 h1{
-margin:12px 0;
 font-size:34px;
+margin:12px 0 8px;
 }
 
 .lead{
 color:var(--muted);
-max-width:70ch;
+margin:0 0 14px;
 }
 
 .facts{
@@ -172,15 +175,13 @@ padding:12px;
 .fact{grid-column:span 12}
 }
 
-section{margin-top:40px}
+section{
+margin-top:40px;
+}
 
 .sectionHead h2{
 margin:0;
 font-size:22px;
-}
-
-.sectionHead p{
-color:var(--muted);
 }
 
 .grid{
@@ -232,15 +233,48 @@ border:1px solid var(--line);
 font-size:13px;
 }
 
-.hoverable{
-transition:transform .18s ease,box-shadow .18s ease;
+/* TARRAT */
+
+.chips{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:10px;
 }
 
-@media(hover:hover){
-.hoverable:hover{
-transform:translateY(-3px);
-box-shadow:0 16px 40px rgba(0,0,0,.10);
+.chip{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:7px 10px;
+border-radius:999px;
+border:1px solid rgba(0,0,0,.08);
+background:#fff;
+font-size:12px;
 }
+
+.dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#666;
+}
+
+/* TAULUKKO */
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+td{
+padding:6px 0;
+border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+td:last-child{
+text-align:right;
 }
 
 footer{
@@ -254,7 +288,19 @@ justify-content:space-between;
 flex-wrap:wrap;
 }
 
+.hoverable{
+transition:transform .18s ease,box-shadow .18s ease;
+}
+
+@media(hover:hover){
+.hoverable:hover{
+transform:translateY(-3px);
+box-shadow:0 16px 40px rgba(0,0,0,.10);
+}
+}
+
 </style>
+
 </head>
 <body>
 
@@ -278,7 +324,6 @@ flex-wrap:wrap;
 <nav class="nav">
 <a href="index.html">Etusivu</a>
 <a href="#tiedot">Tuotetiedot</a>
-<a href="#sisalto">Sisällöt</a>
 </nav>
 
 </header>
@@ -300,9 +345,19 @@ flex-wrap:wrap;
 <h1>Kerakoski PURKKA</h1>
 
 <p class="lead">
-Sokeriton mintunmakuinen purukumi. Sivulla näytetään esimerkki siitä,
-miten GS1 2D-koodi voi tuoda tuotetiedot selkeästi esiin.
+Sokeriton mintunmakuinen purukumi.
 </p>
+
+<div class="chips">
+
+<span class="chip"><span class="dot"></span>Gluteeniton</span>
+<span class="chip"><span class="dot"></span>Laktoositon</span>
+<span class="chip"><span class="dot"></span>Palmuöljytön</span>
+<span class="chip"><span class="dot"></span>Vegaaninen</span>
+<span class="chip"><span class="dot"></span>Sokeriton</span>
+<span class="chip"><span class="dot"></span>Makeutettu ksylitolilla</span>
+
+</div>
 
 <div class="facts" id="tiedot">
 
@@ -313,17 +368,17 @@ miten GS1 2D-koodi voi tuoda tuotetiedot selkeästi esiin.
 
 <div class="fact">
 <strong>Säilytys</strong>
-<span>Huoneenlämmössä suojassa kosteudelta</span>
+<span>Huoneenlämmössä</span>
 </div>
 
 <div class="fact">
 <strong>Kenelle</strong>
-<span>Aikuisille ja yli 6-vuotiaille</span>
+<span>Yli 6-vuotiaille</span>
 </div>
 
 <div class="fact">
-<strong>Messukäyttö</strong>
-<span>Tätä pakkausta jaetaan messuilla</span>
+<strong>Valmistus</strong>
+<span>Valmistettu Alankomaissa • Pakattu Ruotsissa</span>
 </div>
 
 </div>
@@ -333,45 +388,117 @@ miten GS1 2D-koodi voi tuoda tuotetiedot selkeästi esiin.
 </div>
 
 
-<section id="sisalto">
+<section>
 
 <div class="sectionHead">
-<h2>Mitä kaikkea tuotesivulla voi olla</h2>
-<p>Tuotesivulla voidaan näyttää tuotteen keskeiset tiedot selkeästi.</p>
+<h2>Tuotetiedot</h2>
 </div>
 
 <div class="grid">
 
-<div class="card hoverable">
-<div class="cardTop"><div class="icon">🧾</div><h3>Tuotekuvaus</h3></div>
-<p>Tuotteen ominaisuudet ja keskeinen tieto.</p>
-<div class="sub">
-Raikas sokeriton spearmint-purkka.
-</div>
-</div>
-
 
 <div class="card hoverable">
-<div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat</h3></div>
-<p>Ainesosaluettelo ja lisätiedot.</p>
+
+<div class="cardTop">
+<div class="icon">🥜</div>
+<h3>Ainesosat</h3>
+</div>
 
 <div class="sub">
-<strong>Ainesosat:</strong><br>
+
 makeutusaineet (sorbitoli, isomalttioli, maltitolisiirappi, ksylitoli,
-asesulfaami K, aspartaami), purukumin perusmassa, arabikumi,
-aromit, sitruunahappo, E171, glyseroli, karnaubavaha,
-lesitiini (E322).<br><br>
+asesulfaami K, aspartaami), purukumin perusmassa,
+arabikumi, aromit, sitruunahappo, E171,
+glyseroli, karnaubavaha, lesitiini E322.
 
-Sisältää fenyylialaniinin lähteen.<br>
+<br><br>
+
+Sisältää fenyylialaniinin lähteen.  
 Liiallisella käytöllä voi olla laksatiivisia vaikutuksia.
+
 </div>
 
 </div>
 
 
 <div class="card hoverable">
-<div class="cardTop"><div class="icon">♻️</div><h3>Kierrätys</h3></div>
-<p>Pakkausmateriaalien lajittelu.</p>
+
+<div class="cardTop">
+<div class="icon">⚠️</div>
+<h3>Allergeenit</h3>
+</div>
+
+<div class="sub">
+Ei sisällä EU:n yleisimpiä allergeeneja.
+</div>
+
+</div>
+
+
+<div class="card hoverable">
+
+<div class="cardTop">
+<div class="icon">📊</div>
+<h3>Ravintosisältö / 100 g</h3>
+</div>
+
+<div class="sub">
+
+<table>
+
+<tr>
+<td>Energia</td>
+<td>640 kJ / 160 kcal</td>
+</tr>
+
+<tr>
+<td>Rasva</td>
+<td>0,8 g</td>
+</tr>
+
+<tr>
+<td>josta tyydyttynyttä</td>
+<td>0,4 g</td>
+</tr>
+
+<tr>
+<td>Hiilihydraatit</td>
+<td>70,3 g</td>
+</tr>
+
+<tr>
+<td>josta sokereita</td>
+<td>0 g</td>
+</tr>
+
+<tr>
+<td>josta polyoleja</td>
+<td>66,9 g</td>
+</tr>
+
+<tr>
+<td>Proteiini</td>
+<td>0 g</td>
+</tr>
+
+<tr>
+<td>Suola</td>
+<td>0 g</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="card hoverable">
+
+<div class="cardTop">
+<div class="icon">♻️</div>
+<h3>Kierrätys</h3>
+</div>
 
 <div class="sub">
 Kartonkipakkaus: kartonkikeräys<br>
@@ -383,40 +510,50 @@ Purukumi: sekajäte
 
 
 <div class="card hoverable">
-<div class="cardTop"><div class="icon">📦</div><h3>Erä- ja päiväys</h3></div>
-<p>Jäljitettävyyden tukena.</p>
+
+<div class="cardTop">
+<div class="icon">🌍</div>
+<h3>Hiilijalanjälki</h3>
+</div>
 
 <div class="sub">
-Erä: L2403-KRK<br>
-Parasta ennen: 2027-06-30
+Arvioitu hiilijalanjälki:<br>
+<strong>0,18 kg CO₂e / pakkaus</strong>
 </div>
 
 </div>
 
 
 <div class="card hoverable">
-<div class="cardTop"><div class="icon">🏭</div><h3>Pakkaaja</h3></div>
-<p>Tuotteen pakkaaja.</p>
+
+<div class="cardTop">
+<div class="icon">🏅</div>
+<h3>Sertifikaatit</h3>
+</div>
 
 <div class="sub">
-Rubiuss AB<br>
-Borggatan 6<br>
-S-44250 Ytterby<br>
-www.borgstena.com
+Vegaaninen tuote<br>
+Palm Oil Free -vaatimusten mukainen<br>
+EU Food Safety -standardien mukainen tuotanto
 </div>
 
 </div>
 
 
 <div class="card hoverable">
-<div class="cardTop"><div class="icon">✨</div><h3>Kampanja</h3></div>
-<p>Lisäsisältö tai kilpailu.</p>
+
+<div class="cardTop">
+<div class="icon">✨</div>
+<h3>Arvonta</h3>
+</div>
 
 <div class="sub">
-Skannaa ja osallistu arvontaan.
+Mikä tekee arjesta hieman raikkaamman?<br><br>
+Voit voittaa Kerakoski-tuotepaketin.
 </div>
 
 </div>
+
 
 </div>
 </section>
@@ -425,7 +562,6 @@ Skannaa ja osallistu arvontaan.
 <footer>
 
 <div>
-<strong>Huom.</strong>
 Kerakoski.fi on GS1 Finlandin demoympäristö.
 </div>
 
