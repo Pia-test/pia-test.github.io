@@ -52,8 +52,6 @@ word-break:normal;
 hyphens:auto;
 }
 
-a{color:inherit}
-
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -107,11 +105,6 @@ border-radius:999px;
 color:var(--muted);
 }
 
-.nav a:hover{
-background:rgba(0,0,0,.04);
-color:var(--ink);
-}
-
 .hero{
 background:var(--surface);
 border:1px solid var(--line);
@@ -156,6 +149,31 @@ color:var(--muted);
 margin:0 0 14px;
 }
 
+.marks{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:10px;
+}
+
+.mark{
+width:80px;
+height:80px;
+border-radius:50%;
+border:1px solid var(--line);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:white;
+font-size:11px;
+text-align:center;
+}
+
+.mark span{
+font-size:18px;
+}
+
 .facts{
 display:grid;
 grid-template-columns:repeat(12,1fr);
@@ -177,11 +195,6 @@ padding:12px;
 
 section{
 margin-top:40px;
-}
-
-.sectionHead h2{
-margin:0;
-font-size:22px;
 }
 
 .grid{
@@ -232,35 +245,6 @@ background:#fff;
 border:1px solid var(--line);
 font-size:13px;
 }
-
-/* TARRAT */
-
-.chips{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-top:10px;
-}
-
-.chip{
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:7px 10px;
-border-radius:999px;
-border:1px solid rgba(0,0,0,.08);
-background:#fff;
-font-size:12px;
-}
-
-.dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:#666;
-}
-
-/* TAULUKKO */
 
 table{
 width:100%;
@@ -348,14 +332,14 @@ box-shadow:0 16px 40px rgba(0,0,0,.10);
 Sokeriton mintunmakuinen purukumi.
 </p>
 
-<div class="chips">
+<div class="marks">
 
-<span class="chip"><span class="dot"></span>Gluteeniton</span>
-<span class="chip"><span class="dot"></span>Laktoositon</span>
-<span class="chip"><span class="dot"></span>Palmuöljytön</span>
-<span class="chip"><span class="dot"></span>Vegaaninen</span>
-<span class="chip"><span class="dot"></span>Sokeriton</span>
-<span class="chip"><span class="dot"></span>Makeutettu ksylitolilla</span>
+<div class="mark"><span>🌾</span>Gluteeniton</div>
+<div class="mark"><span>🥛</span>Laktoositon</div>
+<div class="mark"><span>🌴</span>Palmuöljytön</div>
+<div class="mark"><span>🌱</span>Vegaaninen</div>
+<div class="mark"><span>🍬</span>Sokeriton</div>
+<div class="mark"><span>🟩</span>Ksylitoli</div>
 
 </div>
 
@@ -363,7 +347,7 @@ Sokeriton mintunmakuinen purukumi.
 
 <div class="fact">
 <strong>Perustiedot</strong>
-<span>Purukumi • 12 palaa</span>
+<span>Purukumi • sokeriton • spearmint • 12 palaa</span>
 </div>
 
 <div class="fact">
@@ -387,23 +371,12 @@ Sokeriton mintunmakuinen purukumi.
 </div>
 </div>
 
-
 <section>
-
-<div class="sectionHead">
-<h2>Tuotetiedot</h2>
-</div>
 
 <div class="grid">
 
-
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">🥜</div>
-<h3>Ainesosat</h3>
-</div>
-
+<div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat</h3></div>
 <div class="sub">
 
 makeutusaineet (sorbitoli, isomalttioli, maltitolisiirappi, ksylitoli,
@@ -413,35 +386,21 @@ glyseroli, karnaubavaha, lesitiini E322.
 
 <br><br>
 
-</div>
+Sisältää fenyylialaniinin lähteen.
+Liiallisella käytöllä voi olla laksatiivisia vaikutuksia.
 
 </div>
-
+</div>
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">⚠️</div>
-<h3>Allergeenit</h3>
-</div>
-
+<div class="cardTop"><div class="icon">⚠️</div><h3>Allergeenit</h3></div>
 <div class="sub">
 Ei sisällä EU:n yleisimpiä allergeeneja.
-
-Sisältää fenyylialaniinin lähteen.  
-Liiallisella käytöllä voi olla laksatiivisia vaikutuksia.
 </div>
-
 </div>
-
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">📊</div>
-<h3>Ravintosisältö / 100 g</h3>
-</div>
-
+<div class="cardTop"><div class="icon">📊</div><h3>Ravintosisältö / 100 g</h3></div>
 <div class="sub">
 
 <table>
@@ -489,75 +448,52 @@ Liiallisella käytöllä voi olla laksatiivisia vaikutuksia.
 </table>
 
 </div>
-
 </div>
-
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">♻️</div>
-<h3>Kierrätys</h3>
-</div>
-
+<div class="cardTop"><div class="icon">♻️</div><h3>Kierrätys</h3></div>
 <div class="sub">
 Kartonkipakkaus: kartonkikeräys<br>
 Sisäpaperi: energiajäte<br>
 Purukumi: sekajäte
 </div>
-
 </div>
-
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">🌍</div>
-<h3>Hiilijalanjälki</h3>
-</div>
-
+<div class="cardTop"><div class="icon">🌍</div><h3>Hiilijalanjälki</h3></div>
 <div class="sub">
 Arvioitu hiilijalanjälki:<br>
 <strong>0,18 kg CO₂e / pakkaus</strong>
 </div>
-
 </div>
-
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">🏅</div>
-<h3>Sertifikaatit</h3>
-</div>
-
+<div class="cardTop"><div class="icon">🏅</div><h3>Sertifikaatit</h3></div>
 <div class="sub">
 Vegaaninen tuote<br>
-Palm Oil Free -vaatimusten mukainen<br>
-EU Food Safety -standardien mukainen tuotanto
+Palm Oil Free -vaatimusten mukainen
 </div>
-
 </div>
-
 
 <div class="card hoverable">
-
-<div class="cardTop">
-<div class="icon">✨</div>
-<h3>Arvonta</h3>
-</div>
-
+<div class="cardTop"><div class="icon">🔐</div><h3>Yksilöinti</h3></div>
 <div class="sub">
-Mikä tekee arjesta hieman raikkaamman?<br><br>
-Voit voittaa Kerakoski-tuotepaketin.
+Sarjanumero: KRK-2026-03-05-8F2A<br>
+Yksilöllinen tunniste: 9A7F-3K2M-18QX
+</div>
+</div>
+
+<div class="card hoverable">
+<div class="cardTop"><div class="icon">🛡️</div><h3>Turvallisuus ja takaisinvedot</h3></div>
+<div class="sub">
+Tuote on turvallinen käyttää ohjeiden mukaisesti.
+Ei aktiivisia takaisinvetotiedotteita.
+</div>
 </div>
 
 </div>
 
-
-</div>
 </section>
-
 
 <footer>
 
