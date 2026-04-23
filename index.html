@@ -1,63 +1,62 @@
+
 <!doctype html>
 <html lang="fi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kerakoski - GS1 2D-koodin demo</title>
-  <meta name="description" content="Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat osin kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen." />
+  <meta name="description" content="Kerakoski.fi on GS1 2D-koodin demoympäristö. Tutustu demo-tuotteisiin." />
 
   <style>
     :root{
-      /* Warm Scandinavian base */
-      --bg: #fbfaf8;
-      --surface: rgba(255,255,255,.78);
-      --surface2: rgba(255,255,255,.88);
+      --bg: #f4f6fb;
+      --bg2: #eef2ff;
+      --surface: rgba(255,255,255,.88);
+      --surface-strong: rgba(255,255,255,.96);
       --ink: #161616;
       --muted: #5b5b5b;
       --line: rgba(0,0,0,.08);
 
-      /* Muted accent haze (not GS1) */
       --sage: #2f6f5e;
       --clay: #c47d4a;
       --lav: #7a74c7;
       --rose: #d78aa4;
+      --sky: #7fb6ff;
 
-      --radius-lg: 22px;
-      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
 
-      --shadow: 0 10px 30px rgba(0,0,0,.06);
-      --shadow-soft: 0 6px 18px rgba(0,0,0,.05);
+      --shadow: 0 12px 34px rgba(0,0,0,.08);
+      --shadow-soft: 0 8px 24px rgba(0,0,0,.06);
 
       --max: 1120px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-
-    /* Finnish hyphenation + sane wrapping */
     html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--ink);
       background:
-        radial-gradient(1200px 800px at 18% -10%, rgba(199,163,140,.18), transparent 60%),
-        radial-gradient(1000px 700px at 92% 8%, rgba(120,116,199,.14), transparent 55%),
-        radial-gradient(900px 650px at 55% 115%, rgba(47,111,94,.12), transparent 55%),
-        var(--bg);
+        radial-gradient(1100px 780px at 14% -10%, rgba(127,182,255,.22), transparent 60%),
+        radial-gradient(1000px 720px at 90% 8%, rgba(122,116,199,.16), transparent 55%),
+        radial-gradient(900px 680px at 50% 115%, rgba(215,138,164,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       line-height:1.5;
     }
 
-    /* Prevent overflow but avoid ugly mid-letter breaks */
-    img, svg, video { max-width: 100%; height: auto; }
-    .wrap, .grid, .steps { min-width: 0; }
+    img, svg, video{ max-width:100%; height:auto; }
+    a{ color:inherit; }
+    .noUnderline{ text-decoration:none; }
+
     h1,h2,h3,p,li,span,strong,em{
       overflow-wrap: break-word;
       word-break: normal;
       hyphens: auto;
     }
-    a{ color: inherit; }
-    .noUnderline{ text-decoration:none; }
 
     .wrap{
       max-width: var(--max);
@@ -65,7 +64,7 @@
       padding: 28px 20px 84px;
     }
 
-    /* Top bar */
+    /* Topbar */
     .topbar{
       display:flex;
       align-items:center;
@@ -73,6 +72,7 @@
       gap: 16px;
       padding: 10px 0 26px;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -81,25 +81,36 @@
       min-width: 0;
       flex: 1 1 340px;
     }
+
     .logo{
-      width: 56px; height: 56px;
+      width: 56px;
+      height: 56px;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.80);
       box-shadow: var(--shadow-soft);
-      display:grid; place-items:center;
+      display:grid;
+      place-items:center;
       flex: 0 0 auto;
     }
-    .logo img{ width:100%; height:100%; object-fit: cover; display:block; }
+
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
 
     .brandText{ min-width: 0; }
+
     .brand strong{
       display:block;
       font-size: 15px;
       letter-spacing: .2px;
-      white-space: nowrap;   /* prevent Kerakoski splitting */
+      white-space: nowrap;
     }
+
     .brand span{
       display:block;
       font-size: 12px;
@@ -113,22 +124,22 @@
       flex-wrap: wrap;
       justify-content:flex-end;
       font-size: 14px;
-      flex: 0 1 auto;
       min-width: 0;
     }
+
     .nav a{
       text-decoration:none;
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 999px;
       color: var(--muted);
       white-space: nowrap;
     }
+
     .nav a:hover{
       background: rgba(0,0,0,.04);
       color: var(--ink);
     }
 
-    /* Mobile header layout: brand full width, nav to next row */
     @media (max-width: 720px){
       .topbar{ flex-wrap: wrap; align-items:flex-start; }
       .brand{ flex: 1 1 100%; }
@@ -139,309 +150,244 @@
       }
     }
 
-    /* Hero (single full-width card) */
-    .hero{ display:block; }
-
+    /* Hero */
     .heroCard{
-      background: var(--surface);
-      backdrop-filter: blur(6px);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.90), rgba(255,255,255,.78)),
+        radial-gradient(900px 500px at 8% 20%, rgba(127,182,255,.16), transparent 60%),
+        radial-gradient(900px 500px at 90% 80%, rgba(122,116,199,.12), transparent 60%);
+      backdrop-filter: blur(8px);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
-      padding: 28px;
+      padding: 34px;
       position: relative;
       overflow:hidden;
     }
 
     h1{
       margin: 0 0 12px;
-      font-size: clamp(28px, 3.6vw, 44px);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+      font-size: clamp(30px, 4vw, 50px);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      max-width: 14ch;
     }
+
     .lead{
       margin: 0;
       color: var(--muted);
-      font-size: 16.5px;
-      max-width: 70ch;
+      font-size: 17px;
+      max-width: 72ch;
+    }
+
+    .heroActions{
+      margin-top: 20px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ctaBtn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      padding: 14px 16px;
+      border-radius: 16px;
+      color:#fff;
+      background: linear-gradient(135deg, var(--lav), #9a88ff);
+      box-shadow: 0 18px 44px rgba(122,116,199,.22);
+      border: 1px solid rgba(0,0,0,.08);
+      font-weight: 700;
+    }
+
+    .ctaBtn:hover{
+      transform: translateY(-2px);
+    }
+
+    .ctaGhost{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: var(--ink);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(0,0,0,.08);
+      font-weight: 650;
     }
 
     /* Sections */
-    section{ margin-top: 44px; }
+    section{ margin-top: 48px; }
+
     .sectionHead{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
       gap:16px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
+
     .sectionHead h2{
       margin:0;
-      font-size: 22px;
-      letter-spacing: -0.01em;
+      font-size: 24px;
+      letter-spacing: -0.02em;
     }
+
     .sectionHead p{
       margin:0;
       color: var(--muted);
       max-width: 74ch;
-      font-size: 14.5px;
+      font-size: 15px;
     }
 
-    /* Cards grid */
+    /* Product cards */
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
     .card{
-      grid-column: span 3;
+      grid-column: span 6;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 14px 14px 13px;
+      border-radius: var(--radius-lg);
+      padding: 18px;
       box-shadow: var(--shadow-soft);
-      min-height: 112px;
       min-width: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
-    @media (max-width: 1000px){
-      .card{ grid-column: span 4; }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+      border-color: rgba(0,0,0,.12);
     }
-    @media (max-width: 700px){
-      .card{ grid-column: span 6; }
-    }
-    @media (max-width: 520px){
+
+    @media (max-width: 900px){
       .card{ grid-column: span 12; }
     }
 
-    .cardTop{
-      display:flex; align-items:center; gap: 10px;
-      margin-bottom: 8px;
-      min-width: 0;
-    }
-    .icon{
-      width: 34px; height: 34px; border-radius: 12px;
-      background: rgba(0,0,0,.04);
-      border: 1px solid var(--line);
-      display:grid; place-items:center;
-      font-size: 16px;
-      flex: 0 0 auto;
-    }
-    .card h3{
-      margin:0;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-
-    /* Benefits row */
-    .benefits .card{ grid-column: span 4; min-height: 160px; }
-    .benefits ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-    .benefits li{ margin: 6px 0; }
-
-    /* Force benefits cards stack on mobile (fix too-narrow cards) */
-    @media (max-width: 860px){
-      .benefits .card{ grid-column: span 12; }
-    }
-
-    /* Product (single, prominent) */
-    .productWrap{
-      background:
-        linear-gradient(135deg, rgba(215,138,164,.12), rgba(122,116,199,.10)),
-        radial-gradient(900px 650px at 15% 20%, rgba(196,125,74,.08), transparent 60%),
-        radial-gradient(900px 650px at 85% 90%, rgba(47,111,94,.08), transparent 60%),
-        rgba(255,255,255,.70);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(6px);
-    }
-
-    .productInner{
+    .productCard{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 0;
+      grid-template-columns: 220px 1fr;
+      gap: 18px;
+      align-items: center;
     }
-    @media (max-width: 920px){
-      .productInner{ grid-template-columns: 1fr; }
+
+    @media (max-width: 700px){
+      .productCard{
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
     }
 
     .productMedia{
-      padding: 18px;
-      border-right: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.90);
+      box-shadow: 0 14px 34px rgba(0,0,0,.08);
+      aspect-ratio: 4 / 3;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-width: 0;
-    }
-    @media (max-width: 920px){
-      .productMedia{ border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
+      padding: 14px;
     }
 
     .productMedia img{
-      width: 100%;
-      max-width: 720px;
-      border-radius: 18px;
-      border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 14px 34px rgba(0,0,0,.10);
-      background: rgba(255,255,255,.85);
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
       display:block;
     }
 
-    .productInfo{
-      padding: 22px;
-      min-width: 0;
+    .productInfo h3{
+      margin:0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
     }
-    .kicker{
+
+    .productInfo p{
+      margin:0 0 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 14px;
+      padding: 0;
+      list-style:none;
+    }
+
+    .tag{
       display:inline-flex;
       align-items:center;
       gap: 8px;
-      font-size: 12.5px;
-      color: rgba(0,0,0,.72);
-      padding: 7px 10px;
+      padding: 8px 10px;
       border-radius: 999px;
+      background: rgba(255,255,255,.78);
       border: 1px solid rgba(0,0,0,.08);
-      background: rgba(255,255,255,.55);
-    }
-    .productInfo h3{
-      margin: 12px 0 8px;
-      font-size: 24px;
-      letter-spacing: -.02em;
-      line-height: 1.15;
-    }
-    .productInfo p{
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 14.5px;
-      max-width: 70ch;
-    }
-    .hint{
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(0,0,0,.06);
-      color: rgba(0,0,0,.76);
-      font-size: 13.5px;
-      line-height: 1.45;
-    }
-
-    /* “The more you give…” box */
-    .giveReceive{
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      background:
-        linear-gradient(135deg, rgba(215,138,164,.14), rgba(122,116,199,.12)),
-        radial-gradient(900px 650px at 15% 20%, rgba(196,125,74,.08), transparent 60%),
-        radial-gradient(900px 650px at 85% 90%, rgba(47,111,94,.08), transparent 60%),
-        rgba(255,255,255,.75);
-      backdrop-filter: blur(6px);
-    }
-
-    .giveReceiveInner{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-    @media (max-width: 860px){
-      .giveReceiveInner{ grid-template-columns: 1fr; }
-    }
-
-    .grCol{
-      padding: 22px;
-      border-right: 1px solid rgba(0,0,0,.06);
-      min-width: 0;
-    }
-    .grCol:last-child{ border-right: none; }
-
-    @media (max-width: 860px){
-      .grCol{ border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
-      .grCol:last-child{ border-bottom: none; }
-    }
-
-    .grTitle{
-      margin: 0 0 10px;
-      font-size: 24px;
-      letter-spacing: -.02em;
-      line-height: 1.15;
-    }
-    .grTitle em{
-      font-style: normal;
-      background: rgba(255,255,255,.55);
-      padding: 2px 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,.06);
-    }
-
-    .grList{
-      margin: 0;
-      padding-left: 18px;
-      color: rgba(0,0,0,.74);
-      font-size: 14px;
-    }
-    .grList li{ margin: 7px 0; }
-
-    .quote{
-      margin-top: 16px;
-      padding: 14px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(0,0,0,.06);
-      color: rgba(0,0,0,.78);
-      font-size: 13.5px;
-      line-height: 1.45;
-    }
-    .quote strong{
-      display:block;
-      margin-top: 10px;
-      font-size: 13px;
-      color: rgba(0,0,0,.66);
+      font-size: 12.5px;
+      color: rgba(0,0,0,.75);
       font-weight: 650;
     }
 
-    /* Brändeille section spacing so it isn't glued to previous section */
-    .brandsSection{ margin-top: 56px; }
-    .brandsSection .sectionHead{ margin-bottom: 18px; }
+    .cardActions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2px;
+    }
 
-    /* Hover (desktop only) */
-    .hoverable{
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-      will-change: transform;
+    .cardLink{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      text-decoration:none;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(0,0,0,.08);
+      font-size: 13.5px;
+      font-weight: 700;
     }
-    @media (hover:hover) and (pointer:fine){
-      .hoverable:hover{
-        transform: translateY(-3px);
-        box-shadow: 0 16px 40px rgba(0,0,0,.10);
-        border-color: rgba(0,0,0,.12);
-      }
+
+    .cardLink.primary{
+      color:#fff;
+      background: linear-gradient(135deg, var(--lav), #9a88ff);
+      border-color: rgba(0,0,0,.08);
     }
-    @media (prefers-reduced-motion: reduce){
-      .hoverable{ transition: none; }
+
+    .comingSoon{
+      opacity: .82;
     }
 
     /* Footer */
     footer{
-      margin-top: 54px;
+      margin-top: 58px;
       padding-top: 22px;
       border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
-      display:flex; justify-content:space-between; gap: 14px; flex-wrap: wrap;
+      display:flex;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap: wrap;
     }
-    .fineprint{ max-width: 95ch; }
+
+    .fineprint{
+      max-width: 90ch;
+    }
   </style>
 </head>
 
@@ -459,206 +405,136 @@
       </a>
 
       <nav class="nav" aria-label="Sivun navigaatio">
-        <a href="purkka.html">Demotuote</a>
-        <a href="#kayttotapaukset">Käyttötapaukset</a>
-        <a href="#hyodyt">Hyödyt</a>
-        <a href="#brandeille">Brändeille</a>
+        <a href="#tuotteet">Tuotteet</a>
+        <a href="https://gs1.fi/fi/2dkoodi" target="_blank" rel="noopener">GS1 2D-koodi</a>
       </nav>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <div class="hero">
-        <div class="heroCard hoverable">
-          <h1>Yksi skannaus ja tuotteen tiedot heräävät eloon.</h1>
+      <section class="hero">
+        <div class="heroCard">
+          <h1>Yksi skannaus ja tuotetieto herää eloon</h1>
           <p class="lead">
-            Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
+            Kerakoski on GS1 2D-koodin demoympäristö. Tutustu esimerkkituotteisiin ja katso, miten tuotetiedot voidaan esittää digitaalisesti kuluttajalle.
           </p>
-        </div>
-      </div>
 
-      <!-- DEMOTUOTE -->
-      <section id="demotuote">
+          <div class="heroActions">
+            <a class="ctaBtn" href="#tuotteet">Tutustu demo-tuotteisiin →</a>
+            <a class="ctaGhost" href="https://gs1.fi/fi/2dkoodi" target="_blank" rel="noopener">Lue GS1 2D-koodista ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="tuotteet">
         <div class="sectionHead">
           <div>
-            <h2>Demotuote</h2>
+            <h2>Demo-tuotteet</h2>
+            <p>Valitse tuote ja tutustu, mitä tietoa GS1 2D-koodi voi tarjota kuluttajalle.</p>
           </div>
         </div>
 
-        <a class="noUnderline" href="purkka.html" aria-label="Avaa Kerakoski PURKKA tuotesivu">
-          <div class="productWrap hoverable">
-            <div class="productInner">
+        <div class="grid">
+          <article class="card">
+            <div class="productCard">
               <div class="productMedia">
-                <img src="purkka.png" alt="Kerakoski PURKKA -demotuote" onerror="this.style.display='none'">
+                <img src="purkka.png" alt="Demo Purkka" onerror="this.style.display='none'">
               </div>
 
               <div class="productInfo">
-                <span class="kicker">Kerakoski</span>
-                <h3>Kerakoski PURKKA</h3>
-                <p>
-                  Tämä on demotuote, jonka avulla voit kokeilla GS1 2D-koodin toimintaa käytännössä.
-            
-                </p>
-                <div class="hint">
-                  Vinkki: Mieti, mitä tietoa haluaisit nähdä tuotetasolla (esim. ainesosat, turvallisuus, vastuullisuus, ohjeet).
+                <h3>Demo Purkka</h3>
+                <p>Sokeriton purukumi, jonka avulla voidaan näyttää kampanjoita, lisäsisältöjä ja kuluttajaviestintää selkeästi tuotesivulla.</p>
+
+                <ul class="tags" aria-label="Demo Purkan sisällöt">
+                  <li class="tag">Kampanja</li>
+                  <li class="tag">Ravintoarvot</li>
+                  <li class="tag">Kierrätys</li>
+                  <li class="tag">Lisätiedot</li>
+                </ul>
+
+                <div class="cardActions">
+                  <a class="cardLink primary" href="purkka.html">Avaa tuote →</a>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
-      </section>
+          </article>
 
-      <!-- KÄYTTÖTAPAUKSET -->
-      <section id="kayttotapaukset">
-        <div class="sectionHead">
-          <div>
-            <h2>Käyttötapaukset</h2>
-            <p>GS1 2D-koodi auttaa tuomaan tuotteen tiedot esiin yhdellä skannauksella.</p>
-          </div>
-        </div>
+          <article class="card">
+            <div class="productCard">
+              <div class="productMedia">
+                <img src="maito.png" alt="Demo Maito" onerror="this.style.display='none'">
+              </div>
 
-        <div class="grid">
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🧾</div><h3>Laajemmat tuotetiedot</h3></div>
-            <p>Kuvaus, ominaisuudet, kuvat ja linkit yhdessä paikassa.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🥜</div><h3>Ainesosat ja allergeenit</h3></div>
-            <p>Helpommin löydettävät tiedot myös mobiilissa.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🍲</div><h3>Ohjeet ja reseptit</h3></div>
-            <p>Käyttöohjeet, vinkit ja reseptit pakkauksesta verkkoon.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">♻️</div><h3>Kierrätys ja lajittelu</h3></div>
-            <p>Selkeät lajitteluohjeet oikeaan paikkaan, oikeaan aikaan.</p>
-          </div>
+              <div class="productInfo">
+                <h3>Demo Maito</h3>
+                <p>Luomukevytmaito, jonka avulla voidaan näyttää ravintoarvot, alkuperä, kierrätys ja eläinten hyvinvointiin liittyvät tiedot.</p>
 
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🌿</div><h3>Vastuullisuus</h3></div>
-            <p>Alkuperä, sertifikaatit esiin.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">📦</div><h3>Erä- ja päiväystiedot</h3></div>
-            <p>Tuki toimitusketjulle ja hävikin vähentämiselle.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🔐</div><h3>Yksilöinti</h3></div>
-            <p>Sarjanumerot ja yksilölliset tunnisteet tarvittaessa.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🛡️</div><h3>Turvallisuus ja takaisinvedot</h3></div>
-            <p>Nopeampi viestintä ja täsmätieto oikealle erälle.</p>
-          </div>
+                <ul class="tags" aria-label="Demo Maidon sisällöt">
+                  <li class="tag">Ravintoarvot</li>
+                  <li class="tag">Alkuperä</li>
+                  <li class="tag">Kierrätys</li>
+                  <li class="tag">Eläinten hyvinvointi</li>
+                </ul>
 
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">✨</div><h3>Kampanjat</h3></div>
-            <p>Tarjoukset ja sisällöt ilman että pakkausta tarvitsee uudistaa.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🗺️</div><h3>Kontekstin mukaan</h3></div>
-            <p>Myymälä, koti tai toinen maa, sisältö voidaan räätälöidä.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🌍</div><h3>Monikielisyys</h3></div>
-            <p>Sama pakkaus, eri kieli, selkeä kokemus käyttäjälle.</p>
-          </div>
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🧠</div><h3>Yksi koodi, monta hyötyä</h3></div>
-            <p>Yhdistää pakkauksen kätevästi muuttuvaan digitaaliseen sisältöön.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- HYÖDYT -->
-      <section id="hyodyt" class="benefits">
-        <div class="sectionHead">
-          <div>
-            <h2>Hyödyt</h2>
-            <p>Kun tieto löytyy helposti, syntyy parempi päätös, parempi kokemus ja vähemmän kitkaa.</p>
-          </div>
-        </div>
-
-        <div class="grid">
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🏷️</div><h3>Brändeille</h3></div>
-            <p>Lisää tilaa kertoa olennaiset asiat ilman että pakkaus täyttyy tekstistä.</p>
-            <ul>
-              <li>Ajantasaiset sisällöt ja linkit</li>
-              <li>Selkeä tuote- ja bränditarina</li>
-              <li>Läpinäkyvyys rakentaa luottamusta</li>
-            </ul>
-          </div>
-
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🛒</div><h3>Kaupalle ja toimitusketjuun</h3></div>
-            <p>Standardimuotoinen data auttaa prosesseja ja jäljitettävyyttä.</p>
-            <ul>
-              <li>Erä- ja päiväystiedot sujuvasti</li>
-              <li>Tehokkaampi jäljitettävyys</li>
-              <li>Kassa ei päästä läpi takaisinvedettyjä tuotteita</li>
-            </ul>
-          </div>
-
-          <div class="card hoverable">
-            <div class="cardTop"><div class="icon">🙂</div><h3>Kuluttajille</h3></div>
-            <p>Ymmärrettävä tieto yhdessä paikassa juuri silloin kun sitä tarvitaan.</p>
-            <ul>
-              <li>Ainesosat, ohjeet ja kierrätys helposti</li>
-              <li>Monikielinen ja laitekohtainen sisältö</li>
-              <li>Parempi varmuus ostopäätöksessä</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- BRÄNDEILLE (ALIMMaksi) -->
-      <section id="brandeille" class="brandsSection">
-        <div class="sectionHead">
-          <div>
-            <h2>Brändeille: enemmän arvoa yhdellä skannauksella</h2>
-            <p>Ajatus on yksinkertainen: mitä relevantimpaa sisältöä jaat, sitä enemmän saat takaisin, myös datassa ja ymmärryksessä.</p>
-          </div>
-        </div>
-
-        <div class="giveReceive hoverable" role="region" aria-label="Brändeille: mitä enemmän jaat, sitä enemmän saat takaisin">
-          <div class="giveReceiveInner">
-            <div class="grCol">
-              <div class="grTitle">Mitä enemmän <em>jaat</em></div>
-              <ul class="grList">
-                <li>Brändin hyväksymä tuotetieto</li>
-                <li>Hinnat ja kampanjat</li>
-                <li>Ravitsemustiedot ja reseptit</li>
-                <li>Turvallisuustiedot</li>
-                <li>Vastuullisuus ja alkuperä</li>
-                <li>Mahdollisuuksia vuorovaikutukseen brändin kanssa</li>
-              </ul>
-            </div>
-
-            <div class="grCol">
-              <div class="grTitle">Sitä enemmän <em>saat takaisin</em></div>
-              <ul class="grList">
-                <li>Verkkosivu-, sovellus- ja tuotetiedot</li>
-                <li>Markkinointi- ja mainosdata</li>
-                <li>Myynti- ja transaktiodata</li>
-                <li>Palautedata</li>
-              </ul>
-
-              <div class="quote">
-                “We know that the average dwell time on a... generic QR code (directing to www.brandname.com) is 5 seconds...
-                and our clients are achieving 7 times (35 seconds) or more by sharing hyper-relevant content at barcode level...
-                thanks to the GS1 compliant QR codes.”
-                <strong>- Alice Rackley, CEO, Polytag</strong>
+                <div class="cardActions">
+                  <a class="cardLink primary" href="maito.html">Avaa tuote →</a>
+                </div>
               </div>
             </div>
-          </div>
+          </article>
+
+          <article class="card comingSoon">
+            <div class="productCard">
+              <div class="productMedia">
+                <img src="kana.png" alt="Demo Kana" onerror="this.style.display='none'">
+              </div>
+
+              <div class="productInfo">
+                <h3>Demo Kana</h3>
+                <p>Esimerkki tuotteesta, jossa tärkeää ovat turvallisuus, säilytys, alkuperä ja valmistusohjeet.</p>
+
+                <ul class="tags" aria-label="Demo Kanan sisällöt">
+                  <li class="tag">Turvallisuus</li>
+                  <li class="tag">Säilytys</li>
+                  <li class="tag">Alkuperä</li>
+                  <li class="tag">Ohjeet</li>
+                </ul>
+
+                <div class="cardActions">
+                  <span class="cardLink">Tulossa pian</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card comingSoon">
+            <div class="productCard">
+              <div class="productMedia">
+                <img src="naudanfile.png" alt="Demo Naudanfile" onerror="this.style.display='none'">
+              </div>
+
+              <div class="productInfo">
+                <h3>Demo Naudanfile</h3>
+                <p>Esimerkki tuotteesta, jossa voidaan näyttää alkuperä, erätiedot, vastuullisuus ja lisäinformaatio kuluttajalle.</p>
+
+                <ul class="tags" aria-label="Demo Naudanfilen sisällöt">
+                  <li class="tag">Alkuperä</li>
+                  <li class="tag">Erätiedot</li>
+                  <li class="tag">Vastuullisuus</li>
+                  <li class="tag">Lisätieto</li>
+                </ul>
+
+                <div class="cardActions">
+                  <span class="cardLink">Tulossa pian</span>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
       <footer>
         <div class="fineprint">
-          <strong>Huom.</strong> Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
+          <strong>Huom.</strong> Kerakoski.fi on demoympäristö. Tuotteet ja sisällöt ovat osin kuvitteellisia ja tarkoitettu GS1 2D-koodin mahdollisuuksien havainnollistamiseen.
         </div>
         <div>
           <span>GS1 Finland • Demo</span>
@@ -668,3 +544,6 @@
   </div>
 </body>
 </html>
+
+
+
