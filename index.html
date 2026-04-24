@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fi">
 <head>
@@ -16,6 +15,13 @@
       --ink: #161616;
       --muted: #5b5b5b;
       --line: rgba(0,0,0,.08);
+
+      --brand-blue: #123D7A;
+      --brand-blue-light: #EAF3FF;
+      --brand-green: #1F6B4F;
+      --brand-yellow: #F5B400;
+      --brand-brown: #7A4B2A;
+      --brand-red: #C62828;
 
       --sage: #2f6f5e;
       --clay: #c47d4a;
@@ -41,9 +47,9 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--ink);
       background:
-        radial-gradient(1100px 780px at 14% -10%, rgba(127,182,255,.22), transparent 60%),
-        radial-gradient(1000px 720px at 90% 8%, rgba(122,116,199,.16), transparent 55%),
-        radial-gradient(900px 680px at 50% 115%, rgba(215,138,164,.12), transparent 55%),
+        radial-gradient(1100px 780px at 14% -10%, rgba(18,61,122,.14), transparent 60%),
+        radial-gradient(1000px 720px at 90% 8%, rgba(245,180,0,.16), transparent 55%),
+        radial-gradient(900px 680px at 50% 115%, rgba(31,107,79,.12), transparent 55%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       line-height:1.5;
     }
@@ -64,7 +70,6 @@
       padding: 28px 20px 84px;
     }
 
-    /* Topbar */
     .topbar{
       display:flex;
       align-items:center;
@@ -83,22 +88,23 @@
     }
 
     .logo{
-      width: 56px;
-      height: 56px;
+      width: 64px;
+      height: 64px;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.80);
+      background: rgba(255,255,255,.92);
       box-shadow: var(--shadow-soft);
       display:grid;
       place-items:center;
       flex: 0 0 auto;
+      padding: 5px;
     }
 
     .logo img{
       width:100%;
       height:100%;
-      object-fit: cover;
+      object-fit: contain;
       display:block;
     }
 
@@ -150,12 +156,11 @@
       }
     }
 
-    /* Hero */
     .heroCard{
       background:
-        linear-gradient(135deg, rgba(255,255,255,.90), rgba(255,255,255,.78)),
-        radial-gradient(900px 500px at 8% 20%, rgba(127,182,255,.16), transparent 60%),
-        radial-gradient(900px 500px at 90% 80%, rgba(122,116,199,.12), transparent 60%);
+        linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80)),
+        radial-gradient(900px 500px at 8% 20%, rgba(18,61,122,.13), transparent 60%),
+        radial-gradient(900px 500px at 90% 80%, rgba(245,180,0,.13), transparent 60%);
       backdrop-filter: blur(8px);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
@@ -170,7 +175,7 @@
       font-size: clamp(30px, 4vw, 50px);
       letter-spacing: -0.03em;
       line-height: 1.05;
-      max-width: 14ch;
+      max-width: 20ch;
     }
 
     .lead{
@@ -195,8 +200,8 @@
       padding: 14px 16px;
       border-radius: 16px;
       color:#fff;
-      background: linear-gradient(135deg, var(--lav), #9a88ff);
-      box-shadow: 0 18px 44px rgba(122,116,199,.22);
+      background: linear-gradient(135deg, var(--brand-blue), #2459a6);
+      box-shadow: 0 18px 44px rgba(18,61,122,.22);
       border: 1px solid rgba(0,0,0,.08);
       font-weight: 700;
     }
@@ -213,12 +218,11 @@
       padding: 14px 16px;
       border-radius: 16px;
       color: var(--ink);
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.76);
       border: 1px solid rgba(0,0,0,.08);
       font-weight: 650;
     }
 
-    /* Sections */
     section{ margin-top: 48px; }
 
     .sectionHead{
@@ -242,7 +246,6 @@
       font-size: 15px;
     }
 
-    /* Product cards */
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -275,9 +278,10 @@
 
     .productCard{
       display:grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: minmax(210px, 42%) 1fr;
       gap: 18px;
-      align-items: center;
+      align-items: stretch;
+      height: 100%;
     }
 
     @media (max-width: 700px){
@@ -298,6 +302,7 @@
       align-items:center;
       justify-content:center;
       padding: 14px;
+      min-height: 210px;
     }
 
     .productMedia img{
@@ -307,11 +312,19 @@
       display:block;
     }
 
+    .productInfo{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-width:0;
+    }
+
     .productInfo h3{
-      margin:0 0 8px;
-      font-size: 28px;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
+      margin:0 0 10px;
+      font-size: clamp(26px, 3vw, 36px);
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      max-width: 100%;
     }
 
     .productInfo p{
@@ -364,15 +377,14 @@
 
     .cardLink.primary{
       color:#fff;
-      background: linear-gradient(135deg, var(--lav), #9a88ff);
+      background: linear-gradient(135deg, var(--brand-blue), #2459a6);
       border-color: rgba(0,0,0,.08);
     }
 
     .comingSoon{
-      opacity: .82;
+      opacity: .88;
     }
 
-    /* Footer */
     footer{
       margin-top: 58px;
       padding-top: 22px;
@@ -396,7 +408,7 @@
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Kerakoski etusivulle">
         <div class="logo" aria-hidden="true">
-          <img src="logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
+          <img src="Kerakoski logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'">
         </div>
         <div class="brandText">
           <strong>Kerakoski</strong>
@@ -461,7 +473,7 @@
           <article class="card">
             <div class="productCard">
               <div class="productMedia">
-                <img src="maito.png" alt="Demo Maito" onerror="this.style.display='none'">
+                <img src="Demo maito.png" alt="Demo Maito" onerror="this.style.display='none'">
               </div>
 
               <div class="productInfo">
@@ -485,7 +497,7 @@
           <article class="card comingSoon">
             <div class="productCard">
               <div class="productMedia">
-                <img src="kana.png" alt="Demo Kana" onerror="this.style.display='none'">
+                <img src="Demo Kana.png" alt="Demo Kana" onerror="this.style.display='none'">
               </div>
 
               <div class="productInfo">
@@ -509,7 +521,7 @@
           <article class="card comingSoon">
             <div class="productCard">
               <div class="productMedia">
-                <img src="naudanfile.png" alt="Demo Naudanfile" onerror="this.style.display='none'">
+                <img src="Demo Naudanlihafile 800g.png" alt="Demo Naudanfile" onerror="this.style.display='none'">
               </div>
 
               <div class="productInfo">
@@ -544,6 +556,3 @@
   </div>
 </body>
 </html>
-
-
-
