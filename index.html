@@ -10,31 +10,17 @@
     :root{
       --bg: #f4f6fb;
       --bg2: #eef2ff;
-      --surface: rgba(255,255,255,.88);
-      --surface-strong: rgba(255,255,255,.96);
+      --surface: rgba(255,255,255,.90);
       --ink: #161616;
       --muted: #5b5b5b;
       --line: rgba(0,0,0,.08);
-
       --brand-blue: #123D7A;
-      --brand-blue-light: #EAF3FF;
-      --brand-green: #1F6B4F;
       --brand-yellow: #F5B400;
       --brand-brown: #7A4B2A;
       --brand-red: #C62828;
-
-      --sage: #2f6f5e;
-      --clay: #c47d4a;
-      --lav: #7a74c7;
-      --rose: #d78aa4;
-      --sky: #7fb6ff;
-
       --radius-lg: 24px;
-      --radius-md: 18px;
-
       --shadow: 0 12px 34px rgba(0,0,0,.08);
       --shadow-soft: 0 8px 24px rgba(0,0,0,.06);
-
       --max: 1120px;
     }
 
@@ -49,33 +35,26 @@
       background:
         radial-gradient(1100px 780px at 14% -10%, rgba(18,61,122,.14), transparent 60%),
         radial-gradient(1000px 720px at 90% 8%, rgba(245,180,0,.16), transparent 55%),
-        radial-gradient(900px 680px at 50% 115%, rgba(31,107,79,.12), transparent 55%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       line-height:1.5;
     }
 
-    img, svg, video{ max-width:100%; height:auto; }
+    img{ max-width:100%; height:auto; display:block; }
     a{ color:inherit; }
-    .noUnderline{ text-decoration:none; }
-
     h1,h2,h3,p,li,span,strong,em{
       overflow-wrap: break-word;
       word-break: normal;
       hyphens: auto;
     }
 
-    .wrap{
-      max-width: var(--max);
-      margin:0 auto;
-      padding: 28px 20px 84px;
-    }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 28px 20px 84px; }
 
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 16px;
-      padding: 10px 0 26px;
+      gap:16px;
+      padding:10px 0 26px;
     }
 
     .brand{
@@ -83,77 +62,69 @@
       align-items:center;
       gap:12px;
       text-decoration:none;
-      min-width: 0;
-      flex: 1 1 340px;
+      min-width:0;
+      flex:1 1 340px;
     }
 
     .logo{
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
+      width:64px;
+      height:64px;
+      border-radius:16px;
       overflow:hidden;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      box-shadow: var(--shadow-soft);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.92);
+      box-shadow:var(--shadow-soft);
       display:grid;
       place-items:center;
-      flex: 0 0 auto;
-      padding: 5px;
+      flex:0 0 auto;
+      padding:5px;
     }
 
     .logo img{
       width:100%;
       height:100%;
-      object-fit: contain;
-      display:block;
+      object-fit:contain;
     }
-
-    .brandText{ min-width: 0; }
 
     .brand strong{
       display:block;
-      font-size: 15px;
-      letter-spacing: .2px;
-      white-space: nowrap;
+      font-size:15px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      color:var(--brand-blue);
     }
 
     .brand span{
       display:block;
-      font-size: 12px;
-      color: var(--muted);
+      font-size:12px;
+      color:var(--brand-blue);
       margin-top:2px;
+      opacity:.78;
     }
 
     .nav{
       display:flex;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap:14px;
+      flex-wrap:wrap;
       justify-content:flex-end;
-      font-size: 14px;
-      min-width: 0;
+      font-size:14px;
     }
 
     .nav a{
       text-decoration:none;
-      padding: 8px 12px;
-      border-radius: 999px;
-      color: var(--muted);
-      white-space: nowrap;
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--brand-blue);
+      white-space:nowrap;
+      font-weight:650;
     }
 
-    .nav a:hover{
-      background: rgba(0,0,0,.04);
-      color: var(--ink);
-    }
+    .nav a:hover{ background:rgba(18,61,122,.07); }
 
-    @media (max-width: 720px){
-      .topbar{ flex-wrap: wrap; align-items:flex-start; }
-      .brand{ flex: 1 1 100%; }
-      .nav{
-        flex: 1 1 100%;
-        justify-content:flex-start;
-        gap: 10px;
-      }
+    @media (max-width:720px){
+      .topbar{ flex-wrap:wrap; align-items:flex-start; }
+      .brand{ flex:1 1 100%; }
+      .nav{ flex:1 1 100%; justify-content:flex-start; gap:10px; }
     }
 
     .heroCard{
@@ -161,155 +132,144 @@
         linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80)),
         radial-gradient(900px 500px at 8% 20%, rgba(18,61,122,.13), transparent 60%),
         radial-gradient(900px 500px at 90% 80%, rgba(245,180,0,.13), transparent 60%);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 34px;
-      position: relative;
+      backdrop-filter:blur(8px);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      padding:34px;
       overflow:hidden;
     }
 
     h1{
-      margin: 0 0 12px;
-      font-size: clamp(30px, 4vw, 50px);
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      max-width: 20ch;
+      margin:0 0 12px;
+      font-size:clamp(30px, 4vw, 50px);
+      letter-spacing:-.03em;
+      line-height:1.05;
+      max-width:20ch;
+      color:var(--brand-blue);
     }
 
     .lead{
-      margin: 0;
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 72ch;
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+      max-width:72ch;
     }
 
     .heroActions{
-      margin-top: 20px;
+      margin-top:20px;
       display:flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-wrap:wrap;
+      gap:12px;
     }
 
-    .ctaBtn{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      text-decoration:none;
-      padding: 14px 16px;
-      border-radius: 16px;
-      color:#fff;
-      background: linear-gradient(135deg, var(--brand-blue), #2459a6);
-      box-shadow: 0 18px 44px rgba(18,61,122,.22);
-      border: 1px solid rgba(0,0,0,.08);
-      font-weight: 700;
-    }
-
-    .ctaBtn:hover{
-      transform: translateY(-2px);
-    }
-
+    .ctaBtn,
     .ctaGhost{
       display:inline-flex;
       align-items:center;
-      gap: 10px;
+      gap:10px;
       text-decoration:none;
-      padding: 14px 16px;
-      border-radius: 16px;
-      color: var(--ink);
-      background: rgba(255,255,255,.76);
-      border: 1px solid rgba(0,0,0,.08);
-      font-weight: 650;
+      padding:14px 16px;
+      border-radius:16px;
+      font-weight:700;
+      border:1px solid rgba(0,0,0,.08);
     }
 
-    section{ margin-top: 48px; }
+    .ctaBtn{
+      color:#fff;
+      background:linear-gradient(135deg, var(--brand-blue), #2459a6);
+      box-shadow:0 18px 44px rgba(18,61,122,.22);
+    }
+
+    .ctaGhost{
+      color:var(--brand-blue);
+      background:rgba(255,255,255,.76);
+      border-color:rgba(18,61,122,.14);
+    }
+
+    section{ margin-top:48px; }
 
     .sectionHead{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
       gap:16px;
-      margin-bottom: 16px;
+      margin-bottom:16px;
     }
 
     .sectionHead h2{
       margin:0;
-      font-size: 24px;
-      letter-spacing: -0.02em;
+      font-size:24px;
+      letter-spacing:-.02em;
+      color:var(--brand-blue);
     }
 
     .sectionHead p{
       margin:0;
-      color: var(--muted);
-      max-width: 74ch;
-      font-size: 15px;
+      color:var(--muted);
+      max-width:74ch;
+      font-size:15px;
     }
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
+      grid-template-columns:repeat(12, 1fr);
+      gap:16px;
     }
 
     .card{
-      grid-column: span 6;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      box-shadow: var(--shadow-soft);
-      min-width: 0;
-      display:flex;
-      flex-direction:column;
-      gap: 14px;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      grid-column:span 6;
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:18px;
+      box-shadow:var(--shadow-soft);
+      min-width:0;
+      overflow:hidden;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
     .card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(0,0,0,.10);
-      border-color: rgba(0,0,0,.12);
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(0,0,0,.10);
+      border-color:rgba(0,0,0,.12);
     }
 
-    @media (max-width: 900px){
-      .card{ grid-column: span 12; }
+    @media (max-width:900px){
+      .card{ grid-column:span 12; }
     }
 
     .productCard{
       display:grid;
-      grid-template-columns: minmax(210px, 42%) 1fr;
-      gap: 18px;
-      align-items: stretch;
-      height: 100%;
+      grid-template-columns:minmax(220px, 46%) 1fr;
+      gap:20px;
+      align-items:stretch;
+      min-height:320px;
     }
 
-    @media (max-width: 700px){
-      .productCard{
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
+    @media (max-width:700px){
+      .productCard{ grid-template-columns:1fr; min-height:0; }
     }
 
     .productMedia{
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,.06);
-      background: rgba(255,255,255,.90);
-      box-shadow: 0 14px 34px rgba(0,0,0,.08);
-      aspect-ratio: 4 / 3;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 14px 34px rgba(0,0,0,.08);
+      min-height:280px;
+      height:100%;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 14px;
-      min-height: 210px;
+      padding:18px;
     }
 
     .productMedia img{
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display:block;
+      width:100%;
+      height:100%;
+      max-height:280px;
+      object-fit:contain;
     }
 
     .productInfo{
@@ -321,85 +281,90 @@
 
     .productInfo h3{
       margin:0 0 10px;
-      font-size: clamp(26px, 3vw, 36px);
-      letter-spacing: -0.035em;
-      line-height: 1.02;
-      max-width: 100%;
+      font-size:clamp(28px, 3.1vw, 38px);
+      letter-spacing:-.035em;
+      line-height:1.02;
+      max-width:100%;
     }
 
     .productInfo p{
       margin:0 0 12px;
-      color: var(--muted);
-      font-size: 15px;
+      color:var(--muted);
+      font-size:15px;
     }
+
+    .theme-purkka{ background:linear-gradient(135deg, rgba(198,40,40,.07), rgba(255,255,255,.90)); }
+    .theme-maito{ background:linear-gradient(135deg, rgba(18,61,122,.07), rgba(255,255,255,.90)); }
+    .theme-kana{ background:linear-gradient(135deg, rgba(245,180,0,.14), rgba(255,255,255,.90)); }
+    .theme-nauta{ background:linear-gradient(135deg, rgba(122,75,42,.10), rgba(255,255,255,.90)); }
+
+    .theme-purkka .productInfo h3{ color:var(--brand-red); }
+    .theme-maito .productInfo h3{ color:var(--brand-blue); }
+    .theme-kana .productInfo h3{ color:#B47A00; }
+    .theme-nauta .productInfo h3{ color:var(--brand-brown); }
 
     .tags{
       display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 14px;
-      padding: 0;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:10px 0 14px;
+      padding:0;
       list-style:none;
     }
 
     .tag{
       display:inline-flex;
       align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(0,0,0,.08);
-      font-size: 12.5px;
-      color: rgba(0,0,0,.75);
-      font-weight: 650;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(0,0,0,.08);
+      font-size:12.5px;
+      color:rgba(0,0,0,.75);
+      font-weight:650;
     }
 
     .cardActions{
       display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 2px;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:2px;
     }
 
     .cardLink{
       display:inline-flex;
       align-items:center;
-      gap: 8px;
+      gap:8px;
       text-decoration:none;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(0,0,0,.08);
-      font-size: 13.5px;
-      font-weight: 700;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(0,0,0,.08);
+      font-size:13.5px;
+      font-weight:700;
+      color:var(--ink);
     }
 
     .cardLink.primary{
       color:#fff;
-      background: linear-gradient(135deg, var(--brand-blue), #2459a6);
-      border-color: rgba(0,0,0,.08);
+      background:linear-gradient(135deg, var(--brand-blue), #2459a6);
     }
 
-    .comingSoon{
-      opacity: .88;
-    }
+    .comingSoon{ opacity:.94; }
 
     footer{
-      margin-top: 58px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
+      margin-top:58px;
+      padding-top:22px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
       display:flex;
       justify-content:space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap:14px;
+      flex-wrap:wrap;
     }
 
-    .fineprint{
-      max-width: 90ch;
-    }
+    .fineprint{ max-width:90ch; }
   </style>
 </head>
 
@@ -446,7 +411,7 @@
         </div>
 
         <div class="grid">
-          <article class="card">
+          <article class="card theme-purkka">
             <div class="productCard">
               <div class="productMedia">
                 <img src="purkka.png" alt="Demo Purkka" onerror="this.style.display='none'">
@@ -455,14 +420,12 @@
               <div class="productInfo">
                 <h3>Demo Purkka</h3>
                 <p>Sokeriton purukumi, jonka avulla voidaan näyttää kampanjoita, lisäsisältöjä ja kuluttajaviestintää selkeästi tuotesivulla.</p>
-
                 <ul class="tags" aria-label="Demo Purkan sisällöt">
                   <li class="tag">Kampanja</li>
                   <li class="tag">Ravintoarvot</li>
                   <li class="tag">Kierrätys</li>
                   <li class="tag">Lisätiedot</li>
                 </ul>
-
                 <div class="cardActions">
                   <a class="cardLink primary" href="purkka.html">Avaa tuote →</a>
                 </div>
@@ -470,7 +433,7 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card theme-maito">
             <div class="productCard">
               <div class="productMedia">
                 <img src="Demo maito.png" alt="Demo Maito" onerror="this.style.display='none'">
@@ -479,14 +442,12 @@
               <div class="productInfo">
                 <h3>Demo Maito</h3>
                 <p>Luomukevytmaito, jonka avulla voidaan näyttää ravintoarvot, alkuperä, kierrätys ja eläinten hyvinvointiin liittyvät tiedot.</p>
-
                 <ul class="tags" aria-label="Demo Maidon sisällöt">
                   <li class="tag">Ravintoarvot</li>
                   <li class="tag">Alkuperä</li>
                   <li class="tag">Kierrätys</li>
                   <li class="tag">Eläinten hyvinvointi</li>
                 </ul>
-
                 <div class="cardActions">
                   <a class="cardLink primary" href="maito.html">Avaa tuote →</a>
                 </div>
@@ -494,7 +455,7 @@
             </div>
           </article>
 
-          <article class="card comingSoon">
+          <article class="card theme-kana comingSoon">
             <div class="productCard">
               <div class="productMedia">
                 <img src="Demo Kana.png" alt="Demo Kana" onerror="this.style.display='none'">
@@ -503,14 +464,12 @@
               <div class="productInfo">
                 <h3>Demo Kana</h3>
                 <p>Esimerkki tuotteesta, jossa tärkeää ovat turvallisuus, säilytys, alkuperä ja valmistusohjeet.</p>
-
                 <ul class="tags" aria-label="Demo Kanan sisällöt">
                   <li class="tag">Turvallisuus</li>
                   <li class="tag">Säilytys</li>
                   <li class="tag">Alkuperä</li>
                   <li class="tag">Ohjeet</li>
                 </ul>
-
                 <div class="cardActions">
                   <span class="cardLink">Tulossa pian</span>
                 </div>
@@ -518,7 +477,7 @@
             </div>
           </article>
 
-          <article class="card comingSoon">
+          <article class="card theme-nauta comingSoon">
             <div class="productCard">
               <div class="productMedia">
                 <img src="Demo Naudanlihafile 800g.png" alt="Demo Naudanfile" onerror="this.style.display='none'">
@@ -527,14 +486,12 @@
               <div class="productInfo">
                 <h3>Demo Naudanfile</h3>
                 <p>Esimerkki tuotteesta, jossa voidaan näyttää alkuperä, erätiedot, vastuullisuus ja lisäinformaatio kuluttajalle.</p>
-
                 <ul class="tags" aria-label="Demo Naudanfilen sisällöt">
                   <li class="tag">Alkuperä</li>
                   <li class="tag">Erätiedot</li>
                   <li class="tag">Vastuullisuus</li>
                   <li class="tag">Lisätieto</li>
                 </ul>
-
                 <div class="cardActions">
                   <span class="cardLink">Tulossa pian</span>
                 </div>
