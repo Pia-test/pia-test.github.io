@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo Paita - Kerakoski</title>
+  <meta name="description" content="Demo Paita - mobiilioptimoitu GS1 2D-koodin tuotesivu (digitaalinen tuotepassi)." />
+  <style>
+    :root{--ink:#3E5D40;--ink2:#3A3E46;--sage:#4B6B4E;--sage2:#E7EFE6;--bg:#F4F5F3;--card:#ffffff;--muted:#5A5E63;--line:rgba(75,107,78,.16);--shadow:0 10px 28px rgba(0,0,0,.09);--soft:0 6px 18px rgba(0,0,0,.06);--radius:24px;--max:1060px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:var(--bg);line-height:1.5}
+    img,svg{max-width:100%;height:auto;display:block}a{color:inherit}h1,h2,h3,p,li,span,strong{hyphens:auto;overflow-wrap:break-word;word-break:normal}
+    .ic{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .wrap{max-width:var(--max);margin:0 auto;padding:20px 16px 70px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 0 18px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+    .logo{width:54px;height:54px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--soft);display:grid;place-items:center;overflow:hidden;padding:5px;flex:0 0 auto}
+    .logo img{width:100%;height:100%;object-fit:contain}
+    .brand strong{display:block;font-size:14px;letter-spacing:.2px;color:var(--ink)}
+    .brand span{display:block;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;font-size:13px}
+    .nav a{text-decoration:none;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid var(--line);color:var(--ink);font-weight:700;white-space:nowrap}
+    @media(max-width:640px){.topbar{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}}
+
+    .hero{border-radius:30px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .heroGrid{display:grid;grid-template-columns:1fr}
+    .heroImage{position:relative;min-height:360px;background:#fff;display:flex;align-items:center;justify-content:center;padding:20px}
+    .heroImage img{max-height:460px;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 16px 24px rgba(0,0,0,.14))}
+    .heroInfo{padding:22px;background:#fff}
+    .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;background:var(--sage2);color:var(--sage);border:1px solid rgba(75,107,78,.22);font-size:12px;font-weight:800}
+    h1{margin:14px 0 8px;font-size:clamp(30px,7.6vw,54px);line-height:1.0;letter-spacing:-.03em;color:var(--ink)}
+    .lead{margin:0;font-size:17px;color:var(--muted);max-width:64ch}
+    .lead strong{display:block;margin-bottom:6px;color:var(--ink)}
+    .badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+    .badge{min-height:72px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:var(--soft);padding:12px;display:flex;align-items:center;gap:10px}
+    .badgeIcon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:var(--sage);color:#fff;flex:0 0 auto;font-size:20px;overflow:hidden}
+    .badge b{display:block;font-size:14px;color:var(--ink)}
+    .badge span{display:none}
+    .badge.highlight{grid-column:span 2;min-height:96px;padding:14px;background:var(--sage2);border-color:rgba(75,107,78,.24);box-shadow:var(--soft)}
+    .badge.highlight .badgeIcon{width:64px;height:64px;border-radius:18px;background:var(--sage);border:1px solid rgba(255,255,255,.25);box-shadow:none}
+    .badge.highlight b{font-size:16px;letter-spacing:-.01em}
+    @media(min-width:840px){.heroGrid{grid-template-columns:.88fr 1.12fr}.heroImage{min-height:560px}.heroInfo{display:flex;flex-direction:column;justify-content:center;padding:34px}}
+
+    section{margin-top:28px}
+    .sectionHead{margin-bottom:12px}
+    .sectionHead h2{margin:0;font-size:24px;letter-spacing:-.03em;color:var(--ink)}
+    .actionGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    @media(min-width:820px){.actionGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    .actionCard{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.96);border-radius:22px;box-shadow:var(--soft);padding:15px;text-align:left;color:var(--ink);cursor:pointer;min-height:146px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .actionCard:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.10);border-color:rgba(34,37,43,.24)}
+    .actionIcon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:var(--sage);color:#fff;margin-bottom:10px}
+    .actionCard h3{margin:0;font-size:16px;letter-spacing:-.02em;color:var(--ink)}
+    .actionCard p{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .openText{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:var(--sage)}
+
+    .featured{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){.featured{grid-template-columns:1fr 1fr}}
+    .panel{border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--soft);padding:18px}
+    .panel h3{margin:0 0 8px;font-size:20px;color:var(--ink);letter-spacing:-.02em}
+    .panel p{margin:0;color:var(--muted);font-size:14px}
+    .sealsRow{margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+    .sealsRow img{width:64px;height:64px;object-fit:contain}
+    .certCount{margin-top:14px;display:flex;align-items:center;gap:14px}
+    .countNumber{width:110px;height:110px;border-radius:28px;background:var(--sage);color:#fff;display:grid;place-items:center;text-align:center;flex:0 0 auto;box-shadow:0 10px 22px rgba(0,0,0,.14)}
+    .countNumber b{display:block;font-size:34px;letter-spacing:-.03em;line-height:1}
+    .countNumber span{display:block;font-size:12px;margin-top:4px;opacity:.92}
+
+    .ctaBand{margin-top:28px;border-radius:26px;background:var(--ink);color:#fff;padding:22px;box-shadow:0 12px 28px rgba(0,0,0,.16);display:grid;gap:14px}
+    .ctaBand h2{margin:0;font-size:26px;letter-spacing:-.03em;color:#fff}
+    .ctaBand p{margin:0;color:rgba(255,255,255,.86)}
+    .ctaBand a.btn{justify-self:start;appearance:none;text-decoration:none;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.14);color:#fff;border-radius:16px;padding:12px 14px;font-weight:900}
+    footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    dialog{border:0;padding:0;width:min(760px,calc(100vw - 28px));border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);background:#fff;color:var(--ink);overflow:hidden}
+    dialog::backdrop{background:rgba(0,0,0,.40)}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px;border-bottom:1px solid var(--line);background:#fff}
+    .modalHead h3{margin:0;font-size:22px;letter-spacing:-.03em;color:var(--ink)}
+    .modalHead p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .closeBtn{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;width:40px;height:40px;cursor:pointer;font-weight:900;flex:0 0 auto}
+    .modalBody{padding:18px;max-height:70vh;overflow:auto}
+    .modalBody h4{margin:18px 0 6px;font-size:15px;color:var(--sage)}
+    .modalBody h4:first-child{margin-top:0}
+    .modalBody p,.modalBody li{color:var(--ink);font-size:14px}
+    .modalBody ul{margin:8px 0 0;padding-left:18px}
+    .infoBox{margin-top:12px;padding:13px;border-radius:18px;background:var(--sage2);border:1px solid rgba(75,107,78,.18);color:var(--ink);font-size:13.5px}
+    .tableWrap{overflow:auto;border-radius:18px;border:1px solid var(--line);margin-top:10px}
+    table{width:100%;min-width:420px;border-collapse:collapse;background:#fff}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(34,37,43,.08);font-size:13.5px;color:var(--ink)}
+    th{background:#EEF1EC;font-weight:900}
+    td:last-child,th:last-child{text-align:right}
+    tr:last-child td{border-bottom:0}
+    .listGrid{display:grid;gap:10px;margin-top:10px}
+    .miniCard{border-radius:18px;border:1px solid var(--line);background:#fff;padding:12px}
+    .miniCard b{color:var(--ink)}
+    .miniCard span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+
+    .certCard{border-radius:18px;border:1px solid var(--line);background:#fff;padding:14px;margin-top:10px}
+    .certCard h4{margin:0 0 8px;font-size:15px;color:var(--ink)}
+    .certRow{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);padding:4px 0;border-bottom:1px dashed rgba(34,37,43,.10)}
+    .certRow:last-of-type{border-bottom:0}
+    .certRow b{color:var(--ink);font-weight:650}
+    .certLink{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:var(--sage);text-decoration:none;border-bottom:1px solid rgba(75,107,78,.35)}
+
+    .timeline{margin-top:6px;border-left:2px solid rgba(75,107,78,.30);padding-left:18px;display:grid;gap:18px}
+    .timeItem{position:relative}
+    .timeItem::before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:999px;background:var(--sage);border:2px solid #fff;box-shadow:0 0 0 2px rgba(75,107,78,.30)}
+    .timeItem time{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
+    .timeItem b{display:block;font-size:14.5px;color:var(--ink);margin-top:2px}
+    .timeItem span{display:block;font-size:13px;color:var(--muted);margin-top:1px}
+
+    @media(max-width:460px){.brand strong{white-space:normal}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Kerakoski etusivulle">
+        <div class="logo"><img src="Kerakoski logo.png" alt="Kerakoski-logo" onerror="this.style.display='none'"></div>
+        <div><strong>Kerakoski</strong><span>GS1 2D-koodin demoympäristö</span></div>
+      </a>
+      <nav class="nav" aria-label="Sivun navigaatio"><a href="index.html">Etusivu</a><a href="https://gs1.fi/fi/2dkoodi" target="_blank" rel="noopener">GS1 2D-koodi</a></nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="heroGrid">
+          <div class="heroImage">
+            <img src="Demo Paita.jpg" alt="Crew-kauluksinen valkoinen t-paita" onerror="this.style.display='none'">
+          </div>
+          <div class="heroInfo">
+            <span class="kicker">Digitaalinen tuotepassi</span>
+            <h1>Demo Paita</h1>
+            <p class="lead"><strong>Crew-kauluksinen valkoinen t-paita</strong>GTIN-13 6400001000421<br>SGTIN 6400001000421001 · Sarjanumero 001</p>
+
+            <div class="badges" aria-label="Tuotteen merkinnät">
+              <div class="badge">
+                <div class="badgeIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+                <div><b>Materiaali: 100% puuvilla</b><span></span></div>
+              </div>
+              <div class="badge">
+                <div class="badgeIcon" style="font-size:20px">🇱🇰</div>
+                <div><b>Alkuperämaa: Sri Lanka</b><span></span></div>
+              </div>
+              <div class="badge highlight">
+                <div class="badgeIcon"><svg class="ic" viewBox="0 0 24 24" style="width:30px;height:30px"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div><b>7 kansainvälistä vastuullisuussertifikaattia</b><span></span></div>
+              </div>
+              <div class="badge">
+                <div class="badgeIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6z"/><path d="M9 4v4h6V4"/></svg></div>
+                <div><b>Unisex · Koko L</b><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sisallot">
+        <div class="sectionHead"><h2>Tuotteen tiedot</h2></div>
+        <div class="actionGrid">
+          <button class="actionCard" data-open="m-tuotetiedot">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M11 3h5a2 2 0 0 1 2 2v5L10 18 5 13 11 3Z"/><circle cx="14.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+              <h3>Tuotetiedot</h3>
+              <p>Kuvaus, malli, väri, materiaali ja tyyli.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-tunnisteet">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 5v14M8 5v14M11 5v14M15 5v14M17.5 5v14M20 5v14"/></svg></div>
+              <h3>Tunnisteet</h3>
+              <p>GTIN-13, SGTIN ja sarjanumero.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-alkupera">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-12A7 7 0 0 0 5 9c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
+              <h3>Alkuperä &amp; valmistaja</h3>
+              <p>Alkuperämaa, valmistaja ja prosessivaiheet.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-sertifikaatit">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <h3>Sertifikaatit</h3>
+              <p>7 vastuullisuus- ja laatusertifikaattia.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-matka">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+              <h3>Tuotteen matka</h3>
+              <p>Jäljitettävyys tilalta kauppaan.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="featured" aria-label="Nostot">
+        <article class="panel">
+          <h3>Sertifikaatit</h3>
+          <p>Tuotteella on useita kansainvälisiä vastuullisuus- ja laatumerkintöjä.</p>
+          <div class="certCount">
+            <div class="countNumber"><div><b>7</b><span>sertifikaattia</span></div></div>
+            <p>Bluesign, GOTS, Higg FEM &amp; FSLM, ISO 14001, Oeko-Tex® Standard 100 ja Supplier to Zero.</p>
+          </div>
+          <div class="sealsRow">
+            <img src="https://gs1fi.goodstag.com/storage/seals/oekotexstandard100.webp" alt="Oeko-Tex Standard 100" onerror="this.style.display='none'">
+            <img src="https://gs1fi.goodstag.com/storage/seals/iso14001.webp" alt="ISO 14001" onerror="this.style.display='none'">
+            <img src="https://gs1fi.goodstag.com/storage/seals/iso45001.webp" alt="ISO 45001" onerror="this.style.display='none'">
+          </div>
+        </article>
+        <article class="panel">
+          <h3>Valmistaja</h3>
+          <p>MAS Holdings (Pvt) Ltd. · GLN 9506000164908 · Sri Lanka</p>
+          <div class="listGrid">
+            <div class="miniCard"><b>Kutominen ja neulominen</b><span>Sri Lanka</span></div>
+            <div class="miniCard"><b>Värjäys ja painaminen</b><span>Sri Lanka</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="ctaBand">
+        <h2>Mikä on GS1 2D-koodi?</h2>
+        <p>Tämä sivu on esimerkki digitaalisesta tuotepassista — samalla koodilla voidaan näyttää tuotetiedot, jäljitettävyys ja sertifikaatit kuluttajalle.</p>
+        <a class="btn" href="https://gs1.fi/fi/2dkoodi" target="_blank" rel="noopener">Lue lisää →</a>
+      </section>
+
+      <footer>
+        <span><a href="index.html" style="text-decoration:none;">← Takaisin tuotteisiin</a></span>
+        <span>Kerakoski • Demo</span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="m-tuotetiedot">
+    <div class="modalHead"><div><h3>Tuotetiedot</h3><p>Kuvaus ja tuotteen ominaisuudet.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <h4>Kuvaus</h4>
+      <p>Valkoinen t-paita on valmistettu pehmeästä ja kevyestä puuvillatrikoota, joka takaa mukavuuden, kun taas hienostunut mélange-kuosi lisää urheilullisuutta.</p>
+      <h4>Tuotetiedot</h4>
+      <div class="tableWrap">
+        <table>
+          <tbody>
+            <tr><td>Malli</td><td>Spring 2024</td></tr>
+            <tr><td>Kategoria</td><td>Vaatteet</td></tr>
+            <tr><td>Väri</td><td>Valkoinen</td></tr>
+            <tr><td>Materiaali</td><td>Puuvilla</td></tr>
+            <tr><td>Sukupuoli</td><td>Unisex</td></tr>
+            <tr><td>Koko</td><td>L</td></tr>
+            <tr><td>Tyyli</td><td>Pyöreä pääntie, lyhyet hihat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="m-tunnisteet">
+    <div class="modalHead"><div><h3>Tunnisteet</h3><p>Tuotteen ja yksittäisen kappaleen tunnisteet.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <div class="listGrid">
+        <div class="miniCard"><b>GTIN-13</b><span>6400001000421</span></div>
+        <div class="miniCard"><b>SGTIN</b><span>6400001000421001</span></div>
+        <div class="miniCard"><b>Sarjanumero</b><span>001</span></div>
+      </div>
+      <div class="infoBox">SGTIN yhdistää GTIN:n ja sarjanumeron — jokainen fyysinen t-paita voidaan yksilöidä erikseen saman tuotekoodin sisällä.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m-alkupera">
+    <div class="modalHead"><div><h3>Alkuperä &amp; valmistaja</h3><p>Raaka-aineen alkuperä ja valmistusvaiheet.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <h4>Alkuperätiedot</h4>
+      <p>Valmistettu 100% puuvillasta.</p>
+      <div class="listGrid">
+        <div class="miniCard"><b>Alkuperämaa</b><span>Sri Lanka</span></div>
+      </div>
+      <h4>Valmistaja</h4>
+      <div class="listGrid">
+        <div class="miniCard"><b>Yrityksen nimi</b><span>MAS Holdings (Pvt) Ltd.</span></div>
+        <div class="miniCard"><b>GLN</b><span>9506000164908</span></div>
+        <div class="miniCard"><b>Maa</b><span>Sri Lanka</span></div>
+      </div>
+      <h4>Prosessi</h4>
+      <div class="listGrid">
+        <div class="miniCard"><b>Kutominen ja neulominen</b><span>Sri Lanka</span></div>
+        <div class="miniCard"><b>Värjäys ja painaminen</b><span>Sri Lanka</span></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="m-sertifikaatit">
+    <div class="modalHead"><div><h3>Sertifikaatit</h3><p>Tuotteen vastuullisuus- ja laatumerkinnät.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <div class="sealsRow">
+        <img src="https://gs1fi.goodstag.com/storage/seals/oekotexstandard100.webp" alt="Oeko-Tex Standard 100" onerror="this.style.display='none'">
+        <img src="https://gs1fi.goodstag.com/storage/seals/iso14001.webp" alt="ISO 14001" onerror="this.style.display='none'">
+        <img src="https://gs1fi.goodstag.com/storage/seals/iso45001.webp" alt="ISO 45001" onerror="this.style.display='none'">
+      </div>
+
+      <div class="certCard">
+        <h4>Bluesign</h4>
+        <div class="certRow"><span>Myönnetty</span><b>23.9.2021</b></div>
+        <div class="certRow"><span>Voimassaolon päättyminen</span><b>25.12.2021</b></div>
+        <div class="certRow"><span>Sertifikaatin numero</span><b>024.587.002</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/bluesign_024587002.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>Scope certificate (Global Organic Textile Standard)</h4>
+        <div class="certRow"><span>Myönnetty</span><b>28.10.2021</b></div>
+        <div class="certRow"><span>Voimassaolon päättyminen</span><b>27.11.2021</b></div>
+        <div class="certRow"><span>Sertifikaatin numero</span><b>CU810136GOTS-2023-00024140</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/GOTS_Scope_Certificate_2023-03-31_07_22_35_UTC.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>Higg FEM verification</h4>
+        <div class="certRow"><span>Myönnetty</span><b>29.9.2021</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/HIGG-FEMverificationcertificate2022.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>Higg FSLM</h4>
+        <div class="certRow"><span>Myönnetty</span><b>30.10.2021</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/Higg-FSLM_17-01-2024.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>ISO 14001:2015</h4>
+        <div class="certRow"><span>Myönnetty</span><b>23.8.2021</b></div>
+        <div class="certRow"><span>Voimassaolon päättyminen</span><b>23.11.2021</b></div>
+        <div class="certRow"><span>Sertifikaatin numero</span><b>LK18/05710</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/ISO14001_2015_03-07-2024.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>Oeko-Tex® Standard 100</h4>
+        <div class="certRow"><span>Myönnetty</span><b>23.10.2021</b></div>
+        <div class="certRow"><span>Voimassaolon päättyminen</span><b>23.11.2021</b></div>
+        <div class="certRow"><span>Sertifikaatin numero</span><b>07.BH.52767</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/OekoTex31-07-2024.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+
+      <div class="certCard">
+        <h4>Supplier to Zero (Level 1)</h4>
+        <div class="certRow"><span>Myönnetty</span><b>20.10.2021</b></div>
+        <div class="certRow"><span>Sertifikaatin numero</span><b>5067-2139-7E9</b></div>
+        <a class="certLink" href="https://gs1fi.goodstag.com/storage/certs/ZDHC20thNov2024.pdf" target="_blank" rel="noopener">Lataa sertifikaatti (PDF) →</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="m-matka">
+    <div class="modalHead"><div><h3>Tuotteen matka</h3><p>Jäljitettävyys raaka-aineesta kauppaan.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <div class="timeline">
+        <div class="timeItem"><time>19.8.2024 klo 9.24</time><b>Siirretty CHANDLER GINNING CO</b><span>Casa Grande, United States</span></div>
+        <div class="timeItem"><time>18.8.2024 klo 16.21</time><b>Siirretty Ziegler Logistics Company</b><span>Bruxelles, Belgium</span></div>
+        <div class="timeItem"><time>16.8.2024 klo 19.50</time><b>Siirretty Algodoeira DB</b><span>Minas Gerais, São Romão, Brasil</span></div>
+        <div class="timeItem"><time>16.8.2024 klo 14.39</time><b>Siirretty MAS Holding (Pvt) Ltd</b><span>Sri Lanka</span></div>
+        <div class="timeItem"><time>11.7.2024 klo 18.01</time><b>Luotu ja aktiivinen</b><span></span></div>
+      </div>
+      <div class="infoBox">Jäljitettävyystieto kertoo, missä raaka-aine on kerätty, jalostettu ja pakattu — kaikki saman GS1 2D-koodin takana.</div>
+    </div>
+  </dialog>
+
+  <script>(function(){const openers=document.querySelectorAll('[data-open]');const closers=document.querySelectorAll('[data-close]');function openDialog(id){const d=document.getElementById(id);if(!d)return;if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','')}function closeDialog(d){if(!d)return;if(typeof d.close==='function')d.close();else d.removeAttribute('open')}openers.forEach(el=>{el.addEventListener('click',e=>{e.preventDefault();openDialog(el.getAttribute('data-open'))})});closers.forEach(btn=>{btn.addEventListener('click',()=>closeDialog(btn.closest('dialog')))});document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('click',e=>{const r=d.getBoundingClientRect();const inside=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;if(!inside)closeDialog(d)})})})();</script>
+</body>
+</html>
