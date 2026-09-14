@@ -18,6 +18,7 @@
       --brand-brown: #7A4B2A;
       --brand-teal: #00606f;
       --brand-pink: #B3005C;
+      --brand-sage: #4B6B4E;
       --radius-lg: 24px;
       --shadow: 0 12px 34px rgba(0,0,0,.08);
       --shadow-soft: 0 8px 24px rgba(0,0,0,.06);
@@ -290,11 +291,13 @@
 
     .theme-purkka{ background:linear-gradient(135deg, rgba(179,0,92,.08), rgba(255,255,255,.90)); }
     .theme-maito{ background:linear-gradient(135deg, rgba(18,61,122,.07), rgba(255,255,255,.90)); }
+    .theme-paita{ background:linear-gradient(135deg, rgba(75,107,78,.10), rgba(255,255,255,.90)); }
     .theme-kana{ background:linear-gradient(135deg, rgba(245,180,0,.14), rgba(255,255,255,.90)); }
     .theme-nauta{ background:linear-gradient(135deg, rgba(122,75,42,.10), rgba(255,255,255,.90)); }
 
     .theme-purkka .productInfo h3{ color:var(--brand-pink); }
     .theme-maito .productInfo h3{ color:var(--brand-blue); }
+    .theme-paita .productInfo h3{ color:var(--brand-sage); }
     .theme-kana .productInfo h3{ color:#B47A00; }
     .theme-nauta .productInfo h3{ color:var(--brand-brown); }
 
@@ -347,6 +350,10 @@
 
     .theme-purkka .cardLink.primary{
       background:var(--brand-pink);
+    }
+
+    .theme-paita .cardLink.primary{
+      background:var(--brand-sage);
     }
 
     .comingSoon{ opacity:.94; }
@@ -446,6 +453,28 @@
                   <li class="tag">Alkuperä</li>
                   <li class="tag">Kierrätys</li>
                   <li class="tag">Eläinten hyvinvointi</li>
+                </ul>
+                <div class="cardActions">
+                  <span class="cardLink primary">Avaa tuote →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a class="card theme-paita" href="paita.html">
+            <div class="productCard">
+              <div class="productMedia">
+                <img src="Demo Paita.jpg" alt="Demo Paita" onerror="this.style.display='none'">
+              </div>
+
+              <div class="productInfo">
+                <h3>Demo Paita</h3>
+                <p>Digitaalinen tuotepassi t-paidalle — tunnisteet, alkuperä, valmistaja, sertifikaatit ja tuotteen matka samassa koodissa.</p>
+                <ul class="tags" aria-label="Demo Paidan sisällöt">
+                  <li class="tag">Tunnisteet</li>
+                  <li class="tag">Alkuperä</li>
+                  <li class="tag">Sertifikaatit</li>
+                  <li class="tag">Tuotteen matka</li>
                 </ul>
                 <div class="cardActions">
                   <span class="cardLink primary">Avaa tuote →</span>
