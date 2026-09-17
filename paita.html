@@ -44,7 +44,7 @@
     .sectionHead{margin-bottom:12px}
     .sectionHead h2{margin:0;font-size:24px;letter-spacing:-.03em;color:var(--ink)}
     .actionGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    @media(min-width:820px){.actionGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(min-width:820px){.actionGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
     .actionCard{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.96);border-radius:22px;box-shadow:var(--soft);padding:15px;text-align:left;color:var(--ink);cursor:pointer;min-height:146px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
     .actionCard:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.10);border-color:rgba(34,37,43,.24)}
     .actionIcon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:var(--sage);color:#fff;margin-bottom:10px}
@@ -107,6 +107,13 @@
     .timeItem b{display:block;font-size:14.5px;color:var(--ink);margin-top:2px}
     .timeItem span{display:block;font-size:13px;color:var(--muted);margin-top:1px}
 
+    .swatchRow{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+    .swatch{display:inline-flex;align-items:center;justify-content:center;min-width:78px;height:44px;border-radius:12px;color:#fff;font-size:12.5px;font-weight:800;padding:0 12px;box-shadow:0 4px 10px rgba(0,0,0,.18)}
+    .videoTeaser{margin-top:14px;display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#12201A;color:#fff}
+    .videoPlay{width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:0 0 auto;font-size:14px}
+    .videoTeaser b{display:block;font-size:13.5px;color:#fff}
+    .videoTeaser span{display:block;font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
+
     @media(max-width:460px){.brand strong{white-space:normal}}
   </style>
 </head>
@@ -129,7 +136,7 @@
           <div class="heroInfo">
             <span class="kicker">Digitaalinen tuotepassi</span>
             <h1>Demo Paita</h1>
-            <p class="lead"><strong>Crew-kauluksinen valkoinen t-paita</strong>GTIN-13 6400001000421<br>SGTIN 6400001000421001 · Sarjanumero 001</p>
+            <p class="lead"><strong>Crew-kauluksinen valkoinen t-paita</strong>GTIN 6400001000421<br>Sarjanumero 3124</p>
 
             <div class="badges" aria-label="Tuotteen merkinnät">
               <div class="badge">
@@ -168,7 +175,7 @@
             <div>
               <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 5v14M8 5v14M11 5v14M15 5v14M17.5 5v14M20 5v14"/></svg></div>
               <h3>Tunnisteet</h3>
-              <p>GTIN-13, SGTIN ja sarjanumero.</p>
+              <p>GTIN ja sarjanumero.</p>
             </div>
             <span class="openText">Avaa →</span>
           </button>
@@ -192,7 +199,31 @@
             <div>
               <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
               <h3>Tuotteen matka</h3>
-              <p>Jäljitettävyys tilalta kauppaan.</p>
+              <p>Jäljitettävyys suunnittelusta kauppaan.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-korjaus">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M17 3l4 4-9 9-4 1 1-4 8-8Z"/><path d="M14 6l4 4"/></svg></div>
+              <h3>Korjausohjeet</h3>
+              <p>Pidennä paidan käyttöikää.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-kierratys">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M17.65 6.35A8 8 0 1 0 19 12"/><path d="M17 4v4h-4"/></svg></div>
+              <h3>Kierrätysohjeet</h3>
+              <p>Näin kierrätät paidan oikein.</p>
+            </div>
+            <span class="openText">Avaa →</span>
+          </button>
+          <button class="actionCard" data-open="m-kampanjat">
+            <div>
+              <div class="actionIcon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 8h16v4H4z"/><path d="M6 12v8h12v-8M12 8V5m0 0c-1 0-2-1-2-2s.6-1 1.2-1C12 2 12 4 12 5Zm0 0c1 0 2-1 2-2s-.6-1-1.2-1C12 2 12 4 12 5Z"/></svg></div>
+              <h3>Uutuudet &amp; kampanjat</h3>
+              <p>Syksyn uutuudet ja muu ajankohtainen sisältö.</p>
             </div>
             <span class="openText">Avaa →</span>
           </button>
@@ -262,11 +293,10 @@
     <div class="modalHead"><div><h3>Tunnisteet</h3><p>Tuotteen ja yksittäisen kappaleen tunnisteet.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
     <div class="modalBody">
       <div class="listGrid">
-        <div class="miniCard"><b>GTIN-13</b><span>6400001000421</span></div>
-        <div class="miniCard"><b>SGTIN</b><span>6400001000421001</span></div>
-        <div class="miniCard"><b>Sarjanumero</b><span>001</span></div>
+        <div class="miniCard"><b>GTIN</b><span>6400001000421</span></div>
+        <div class="miniCard"><b>Sarjanumero</b><span>3124</span></div>
       </div>
-      <div class="infoBox">SGTIN yhdistää GTIN:n ja sarjanumeron — jokainen fyysinen t-paita voidaan yksilöidä erikseen saman tuotekoodin sisällä.</div>
+      <div class="infoBox">GTIN ja sarjanumero yhdessä mahdollistavat jokaisen fyysisen t-paidan yksilöimisen saman tuotekoodin sisällä.</div>
     </div>
   </dialog>
 
@@ -355,7 +385,7 @@
   </dialog>
 
   <dialog id="m-matka">
-    <div class="modalHead"><div><h3>Tuotteen matka</h3><p>Jäljitettävyys raaka-aineesta kauppaan.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalHead"><div><h3>Tuotteen matka</h3><p>Jäljitettävyys suunnittelusta kauppaan.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
     <div class="modalBody">
       <div class="timeline">
         <div class="timeItem"><time>19.8.2024 klo 9.24</time><b>Siirretty CHANDLER GINNING CO</b><span>Casa Grande, United States</span></div>
@@ -363,8 +393,54 @@
         <div class="timeItem"><time>16.8.2024 klo 19.50</time><b>Siirretty Algodoeira DB</b><span>Minas Gerais, São Romão, Brasil</span></div>
         <div class="timeItem"><time>16.8.2024 klo 14.39</time><b>Siirretty MAS Holding (Pvt) Ltd</b><span>Sri Lanka</span></div>
         <div class="timeItem"><time>11.7.2024 klo 18.01</time><b>Luotu ja aktiivinen</b><span></span></div>
+        <div class="timeItem"><time>Kevät 2024</time><b>Suunniteltu Suomessa</b><span>Kerakoski, Suomi</span></div>
       </div>
-      <div class="infoBox">Jäljitettävyystieto kertoo, missä raaka-aine on kerätty, jalostettu ja pakattu — kaikki saman GS1 2D-koodin takana.</div>
+      <div class="infoBox">Jäljitettävyystieto kertoo, missä tuote on suunniteltu, valmistettu ja pakattu — kaikki saman GS1 2D-koodin takana.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m-korjaus">
+    <div class="modalHead"><div><h3>Korjausohjeet</h3><p>Pidennä paidan käyttöikää.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <h4>Pienet korjaukset</h4>
+      <p>Ratkennut sauma tai pieni reikä voidaan usein korjata käsin ompelemalla tai paikallisessa tekstiilikorjaamossa.</p>
+      <h4>Hoito-ohjeet</h4>
+      <ul>
+        <li>Pese 30 °C:ssa, nurja puoli ulospäin</li>
+        <li>Vältä valkaisuainetta</li>
+        <li>Kuivaa mieluiten ripustettuna</li>
+      </ul>
+      <div class="infoBox">Hyvin hoidettu ja korjattu vaate kestää käytössä pidempään — korjattavuus on yksi EU:n tekstiilien digitaalisen tuotepassin keskeisistä tiedoista.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m-kierratys">
+    <div class="modalHead"><div><h3>Kierrätysohjeet</h3><p>Näin kierrätät paidan oikein.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <h4>Kun paita ei enää kelpaa käyttöön</h4>
+      <p>Vie puuvillainen tekstiili tekstiilinkeräykseen — ei sekajätteeseen. Löydät lähimmän keräyspisteen kuntasi jätehuoltoyhtiön sivuilta.</p>
+      <h4>Jos paita on vielä käyttökelpoinen</h4>
+      <p>Anna eteenpäin, vie kirpputorille tai lahjoita hyväntekeväisyyteen ennen kierrätystä.</p>
+      <div class="infoBox">Tekstiilien erilliskeräys on ollut pakollista Suomessa vuodesta 2023 alkaen — GS1 2D-koodi voi ohjata kuluttajan suoraan oikeaan kierrätysohjeeseen.</div>
+    </div>
+  </dialog>
+
+  <dialog id="m-kampanjat">
+    <div class="modalHead"><div><h3>Uutuudet &amp; kampanjat</h3><p>Ajankohtaiset uutuudet ja kampanjat.</p></div><button class="closeBtn" data-close aria-label="Sulje">✕</button></div>
+    <div class="modalBody">
+      <h4>Syksyn uutuudet</h4>
+      <p>Uusi huppari saapuu syksyn mallistoon — kuvassa värivaihtoehdot.</p>
+      <div class="swatchRow" aria-label="Hupparin värivaihtoehdot">
+        <span class="swatch" style="background:#14161A">Musta</span>
+        <span class="swatch" style="background:#1B3A6B">Sininen</span>
+        <span class="swatch" style="background:#3F5C42">Vihreä</span>
+        <span class="swatch" style="background:#8B8F92">Harmaa</span>
+      </div>
+      <div class="videoTeaser">
+        <div class="videoPlay">▶</div>
+        <div><b>Katso pikakatsaus syksyn mallistoon</b><span>Video lisätään tähän — lähetä linkki niin liitän sen</span></div>
+      </div>
+      <div class="infoBox">Uutuudet ja kampanjat voidaan päivittää, vaihtaa tai poistaa ilman että GS1 2D-koodi tai vaate muuttuu.</div>
     </div>
   </dialog>
 
